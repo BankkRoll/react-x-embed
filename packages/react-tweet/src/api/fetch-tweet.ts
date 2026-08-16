@@ -1,4 +1,5 @@
 import type { Tweet } from './types/index.js'
+import { isValidTweet } from './validate-tweet.js'
 
 const SYNDICATION_URL = 'https://cdn.syndication.twimg.com'
 
@@ -75,6 +76,13 @@ export async function fetchTweet(
       return { tombstone: true }
     }
     if (data && Object.keys(data).length === 0) {
+      return { notFound: true }
+    }
+    // A response that can't be rendered is reported as missing rather than
+    // returned, so a payload change degrades to the "not found" state instead
+    // of crashing the page that embedded the tweet. Deleted and suspended
+    // accounts hit this: X returns a tweet-shaped object with no `user`.
+    if (!isValidTweet(data)) {
       return { notFound: true }
     }
     return { data }

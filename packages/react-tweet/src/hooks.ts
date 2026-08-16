@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import swr from 'swr'
-import { type Tweet, TwitterApiError } from './api/index.js'
+import { isValidTweet, type Tweet, TwitterApiError } from './api/index.js'
 
 // Avoids an error when used in the pages directory where useSWR might be in `default`.
 const useSWR = ((swr as any).default as typeof swr) || swr
@@ -17,7 +17,9 @@ async function fetcher([url, fetchOptions]: [
 
   // We return null in case `json.data` is undefined, that way we can check for "loading" by
   // checking if data is `undefined`. `null` means it was fetched.
-  if (res.ok) return json.data || null
+  // Unrenderable payloads are treated as absent for the same reason as on the
+  // server: the consumer shows "not found" rather than crashing.
+  if (res.ok) return isValidTweet(json.data) ? json.data : null
 
   throw new TwitterApiError({
     message: `Failed to fetch tweet at "${url}" with "${res.status}".`,

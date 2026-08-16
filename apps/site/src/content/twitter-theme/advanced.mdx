@@ -14,6 +14,7 @@ import {
   TweetHeader,
   TweetInReplyTo,
   TweetBody,
+  TweetCard,
   TweetMedia,
   TweetInfo,
   TweetActions,
@@ -35,7 +36,11 @@ export const MyTweet = ({ tweet: t, components }: Props) => {
       <TweetBody tweet={tweet} />
       {tweet.mediaDetails?.length ? (
         <TweetMedia tweet={tweet} components={components} />
-      ) : null}
+      ) : (
+        // A tweet's own media takes precedence over a link preview, matching X.
+        // Drop this and tweets sharing a link render without their card.
+        <TweetCard tweet={tweet} />
+      )}
       {tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />}
       <TweetInfo tweet={tweet} />
       <TweetActions tweet={tweet} />

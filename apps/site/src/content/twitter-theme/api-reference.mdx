@@ -12,7 +12,7 @@ import { Tweet } from 'react-x-embed'
 
 Fetches and renders the tweet. It accepts the following props:
 
-- **id** - `string`: the tweet ID. For example in `https://twitter.com/chibicode/status/2040511285998313827` the tweet ID is `2040511285998313827`. This is the only required prop.
+- **id** - `string`: the tweet ID. For example in `https://x.com/chibicode/status/2040511285998313827` the tweet ID is `2040511285998313827`. This is the only required prop.
 - **apiUrl** - `string`: the API URL to fetch the tweet from when using the tweet client-side with SWR. Defaults to `https://react-tweet.vercel.app/api/tweet/:id`.
 - **fallback** - `ReactNode`: The fallback component to render while the tweet is loading. Defaults to `TweetSkeleton`.
 - **onError** - `(error?: any) => any`: The returned error will be sent to the `TweetNotFound` component.
@@ -68,6 +68,34 @@ Renders a tweet. It accepts the following props:
 - **tweet** - `Tweet`: the tweet data, as returned by `getTweet`. Required.
 - **components** - `TwitterComponents`: Components to replace the default tweet components. See the [custom tweet components](#custom-tweet-components) section for more details.
 
+### `TweetCard`
+
+```tsx copy
+import { TweetCard } from 'react-x-embed'
+```
+
+Renders the preview of a link shared in a tweet — image, domain, title and description. It accepts the following props:
+
+- **tweet** - `EnrichedTweet`: the tweet data, as returned by [`enrichTweet`](/api-reference#enrichtweet). Required.
+
+Renders nothing unless the tweet carries a card with a title. Cards without one (`player`, `unified_card`, ad formats) are skipped, since the link already appears inline in the tweet text.
+
+[`EmbeddedTweet`](#embeddedtweet) renders this already, and only when the tweet has no media of its own — a tweet's own photos or video take precedence over a link preview, matching X. You only need it directly when [building custom components](/twitter-theme/advanced).
+
+### `TweetMediaVideo`
+
+```tsx copy
+import { TweetMediaVideo } from 'react-x-embed'
+```
+
+Renders a video, with the poster frame and play button. It accepts the following props:
+
+- **tweet** - `EnrichedTweet | EnrichedQuotedTweet`: the enriched tweet. Required.
+- **media** - `MediaAnimatedGif | MediaVideo`: the media item to render. Required.
+- **quality** - `'low' | 'medium' | 'high'`: which mp4 rendition to play. Defaults to `medium`, which skips the highest bitrate — usually far larger than an inline embed needs.
+
+X's HLS rendition is rendered as an additional `<source>` listed before the mp4, because Safari supports HLS natively and plays it more reliably than X's mp4 endpoints, which don't consistently honour byte-range requests.
+
 ### `TweetSkeleton`
 
 ```tsx copy
@@ -88,7 +116,7 @@ A tweet not found component. It accepts the following props:
 
 ## Custom tweet components
 
-Default components used by [`Tweet`](#tweet) and [`EmbeddedTweet`](#embeddedtweet) can be replaced by passing a `components` prop. It extends the `TwitterComponents` type exported from `react-tweet`:
+Default components used by [`Tweet`](#tweet) and [`EmbeddedTweet`](#embeddedtweet) can be replaced by passing a `components` prop. It extends the `TwitterComponents` type exported from `react-x-embed`:
 
 ```ts copy
 type TwitterComponents = {
@@ -97,6 +125,8 @@ type TwitterComponents = {
   MediaImg?: (props: MediaImgProps) => JSX.Element
 }
 ```
+
+`MediaImg` receives `srcSet` and `sizes` alongside `src`, so a replacement should forward them — dropping them costs you the responsive renditions. `AvatarImg` receives an already-normalised `src`; see [`normalizeAvatarUrl`](/api-reference#normalizeavatarurl).
 
 For example, to replace the default `img` tag used for the avatar and media with `next/image` you can do the following:
 

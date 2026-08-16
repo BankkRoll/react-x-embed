@@ -1,13 +1,11 @@
-# react-tweet site
+# react-x-embed docs
 
-This is documentation site app for `react-tweet`. It uses [Nextra](https://nextra.site).
-
-## Running the app locally
-
-Clone this repository and run the following command:
+Documentation site for `react-x-embed`, built with [Nextra](https://nextra.site).
 
 ```bash
 pnpm install && pnpm dev --filter=site
 ```
 
-The app will be up at running at http://localhost:3000.
+Runs at http://localhost:3000.
+
+Content lives in [`src/content`](./src/content) as MDX. The sidebar order is defined in [`src/content/_meta.ts`](./src/content/_meta.ts) — a new page needs an entry there to appear.

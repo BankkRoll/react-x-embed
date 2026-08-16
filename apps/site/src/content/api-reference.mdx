@@ -1,8 +1,10 @@
 # API Reference
 
-This is the reference for the utility functions that `react-tweet` provides for [building your own tweet components](/custom-theme) or simply fetching a tweet. Navigate to the docs for the [Twitter theme](/twitter-theme) if you want to render the existing Tweet components instead.
+This is the reference for the utility functions that `react-x-embed` provides for [building your own tweet components](/custom-theme) or simply fetching a tweet. Navigate to the docs for the [Twitter theme](/twitter-theme) if you want to render the existing Tweet components instead.
 
-## `getTweet`
+## Fetching
+
+### `getTweet`
 
 ```tsx
 import { getTweet, type Tweet } from 'react-x-embed/api'
@@ -13,14 +15,14 @@ function getTweet(
 ): Promise<Tweet | undefined>
 ```
 
-Fetches and returns a [`Tweet`](https://github.com/vercel/react-tweet/blob/main/packages/react-tweet/src/api/types/tweet.ts). It accepts the following params:
+Fetches and returns a [`Tweet`](https://github.com/BankkRoll/react-x-embed/blob/main/packages/react-x-embed/src/api/types/tweet.ts). It accepts the following params:
 
-- **id** - `string`: the tweet ID. For example in `https://twitter.com/reactiive_/status/2040511285998313827` the tweet ID is `2040511285998313827`.
+- **id** - `string`: the tweet ID. For example in `https://x.com/reactiive_/status/2040511285998313827` the tweet ID is `2040511285998313827`.
 - **fetchOptions** - `RequestInit` (Optional): options to pass to [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/fetch).
 
 If a tweet is not found it returns `undefined`.
 
-## `fetchTweet`
+### `fetchTweet`
 
 ```tsx
 function fetchTweet(
@@ -33,25 +35,34 @@ function fetchTweet(
 }>
 ```
 
-Fetches and returns a [`Tweet`](https://github.com/vercel/react-tweet/blob/main/packages/react-tweet/src/api/types/tweet.ts) just like [`getTweet`](#gettweet), but it also returns additional information about the tweet:
+Fetches and returns a [`Tweet`](https://github.com/BankkRoll/react-x-embed/blob/main/packages/react-x-embed/src/api/types/tweet.ts) just like [`getTweet`](#gettweet), but it also returns additional information about the tweet:
 
 - **data** - `Tweet` (Optional): The tweet data.
 - **tombstone** - `true` (Optional): Indicates if the tweet has been made private.
-- **notFound** - `true` (Optional): Indicates if the tweet was not found.
+- **notFound** - `true` (Optional): Indicates if the tweet was not found, or the response could not be rendered. See [`isValidTweet`](#isvalidtweet).
 
-## `enrichTweet`
+### `isValidTweet`
 
 ```tsx
-import { enrichTweet, type EnrichedTweet } from 'react-x-embed'
+import { isValidTweet } from 'react-x-embed/api'
 
-const enrichTweet: (tweet: Tweet) => EnrichedTweet
+const isValidTweet: (tweet: unknown) => tweet is Tweet
 ```
 
-Enriches a [`Tweet`](https://github.com/vercel/react-tweet/blob/main/packages/react-tweet/src/api/types/tweet.ts) as returned by [`getTweet`](#gettweet) with additional data. This is useful to more easily build custom tweet components.
+Returns whether a syndication response can actually be rendered.
 
-It returns an [`EnrichedTweet`](https://github.com/vercel/react-tweet/blob/main/packages/react-tweet/src/utils.ts).
+The syndication API is undocumented and changes without notice. Historically each change surfaced as a crash deep inside rendering — `Cannot read properties of undefined (reading 'screen_name')` — because the payload was trusted and dereferenced directly. A deleted or suspended account is enough to trigger it: X returns a tweet-shaped object with no `user` at all.
 
-## `useTweet`
+This checks only the fields the renderer dereferences without guarding, so an unexpected payload degrades to "not found" instead of taking down the page. It is deliberately not a full schema check — unknown or added fields are fine, and tweets with no entities stay valid.
+
+Both [`fetchTweet`](#fetchtweet) and [`useTweet`](#usetweet) apply it already. You only need it directly if you fetch the syndication API yourself:
+
+```tsx copy
+const tweet = await fetchFromSomewhereElse(id)
+if (!isValidTweet(tweet)) return <TweetNotFound />
+```
+
+### `useTweet`
 
 > If your app supports React Server Components, use [`getTweet`](#gettweet) instead.
 
@@ -71,9 +82,13 @@ const useTweet: (
 
 SWR hook for fetching a tweet in the browser. It accepts the following parameters:
 
-- **id** - `string`: the tweet ID. For example in `https://twitter.com/reactiive_/status/2040511285998313827` the tweet ID is `2040511285998313827`. This parameter is not used if `apiUrl` is provided.
+- **id** - `string`: the tweet ID. For example in `https://x.com/reactiive_/status/2040511285998313827` the tweet ID is `2040511285998313827`. This parameter is not used if `apiUrl` is provided.
 - **apiUrl** - `string`: the API URL to fetch the tweet from. Defaults to `https://react-tweet.vercel.app/api/tweet/:id`.
 - **fetchOptions** - `RequestInit` (Optional): options to pass to [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/fetch). Try to pass down a reference to the same object to avoid unnecessary re-renders.
+
+> **Note**: the default endpoint is upstream's public deployment. It is a shared, rate-limited service that this project does not operate — [host your own route](/#enabling-cache-for-the-x-api) before going to production.
+
+If neither `id` nor `apiUrl` is provided, `isLoading` is `false`: SWR has no key, so no request is made and there is nothing to wait for. This matters when the id comes from a route that hasn't resolved yet — reporting `isLoading` there would strand the component on a skeleton forever.
 
 We highly recommend adding your own API endpoint in `apiUrl` for production:
 
@@ -92,3 +107,117 @@ Or if the tweet component already knows about the endpoint it needs to use, you 
 ```tsx copy
 <Tweet id={id} />
 ```
+
+## Deriving
+
+### `enrichTweet`
+
+```tsx
+import { enrichTweet, type EnrichedTweet } from 'react-x-embed'
+
+const enrichTweet: (tweet: Tweet) => EnrichedTweet
+```
+
+Enriches a [`Tweet`](https://github.com/BankkRoll/react-x-embed/blob/main/packages/react-x-embed/src/api/types/tweet.ts) as returned by [`getTweet`](#gettweet) with additional data. This is useful to more easily build custom tweet components.
+
+It returns an [`EnrichedTweet`](https://github.com/BankkRoll/react-x-embed/blob/main/packages/react-x-embed/src/utils.ts), which resolves every URL the UI needs (`url`, `like_url`, `reply_url`, `user.follow_url`), splits the tweet text into typed `entities`, and flattens any link preview into [`card`](#enrichcard).
+
+### `enrichCard`
+
+```tsx
+import { enrichCard, type EnrichedCard } from 'react-x-embed'
+
+const enrichCard: (card?: TweetCard) => EnrichedCard | undefined
+```
+
+Flattens a tweet's link preview into render-ready fields: `url`, `domain`, `title`, `description`, `image`, and `large`.
+
+X models cards as an untyped `binding_values` bag whose keys vary by card type, and ships up to seven renditions of the preview image. This picks a rendition sized for an embed rather than the 1600×900 original, and returns `undefined` when there's nothing worth rendering — cards with no title (`player`, `unified_card`, ad formats), since the link already appears inline in the tweet text.
+
+Already applied by [`enrichTweet`](#enrichtweet); you only need it directly when working with a raw `Tweet`.
+
+## Media
+
+These are useful when [building custom components](/custom-theme) that render media themselves.
+
+### `getMediaUrl`
+
+```tsx
+const getMediaUrl: (
+  media: MediaDetails,
+  size: 'small' | 'medium' | 'large',
+) => string
+```
+
+Returns the URL for a given rendition of a photo or video thumbnail.
+
+### `getMediaSrcSet`
+
+```tsx
+const getMediaSrcSet: (media: MediaDetails) => string | undefined
+```
+
+Builds a `srcset` from the renditions X advertises, so the browser can pick based on device pixel ratio. Requesting only the 680px rendition — as upstream did — is soft on retina, where the embed renders at up to 550 CSS pixels.
+
+Returns `undefined` when X reports fewer than two distinct widths, since there would be nothing to choose between.
+
+### `getMediaBackgroundColor`
+
+```tsx
+const getMediaBackgroundColor: (
+  media: MediaDetails,
+  photos?: TweetPhoto[],
+) => string | undefined
+```
+
+Returns the dominant colour X computed for an image, as a CSS `rgb()` string, for use as a placeholder while it loads.
+
+Pass `tweet.photos` as the second argument: the syndication API reports this colour on that parallel array rather than on `mediaDetails`, matched by URL. Videos have no entry there, so this returns `undefined` for them.
+
+### `isMediaAvailable`
+
+```tsx
+const isMediaAvailable: (media: MediaDetails) => boolean
+```
+
+Whether X still serves this media. Media withheld after publication — DMCA takedowns, region blocks — remains in the payload but 404s on fetch, rendering as a broken image. Filter with this before rendering.
+
+### `getMp4Video` and `getMp4Videos`
+
+```tsx
+type VideoQuality = 'low' | 'medium' | 'high'
+
+const getMp4Videos: (media: MediaAnimatedGif | MediaVideo) => VideoVariant[]
+const getMp4Video: (
+  media: MediaAnimatedGif | MediaVideo,
+  quality?: VideoQuality,
+) => VideoVariant | undefined
+```
+
+`getMp4Videos` returns every mp4 rendition sorted by descending bitrate. `getMp4Video` picks one — `medium` by default, which skips the highest bitrate since it is usually far larger than an inline embed needs.
+
+Some videos are served with an HLS-only variant list. Rather than returning `undefined` — which crashed the player, since callers dereference `.url` — `getMp4Video` falls back to the HLS rendition.
+
+### `getHlsVideo`
+
+```tsx
+const getHlsVideo: (
+  media: MediaAnimatedGif | MediaVideo,
+) => VideoVariant | undefined
+```
+
+Returns the HLS (`application/x-mpegURL`) rendition when X provides one.
+
+Safari supports HLS natively and plays it far more reliably than X's mp4 renditions, which don't consistently honour byte-range requests. Render it as an additional `<source>` **before** the mp4 so Safari prefers it and other browsers fall through.
+
+### `normalizeAvatarUrl`
+
+```tsx
+const normalizeAvatarUrl: (src: string) => string
+```
+
+Rewrites a profile image URL to a higher-resolution variant.
+
+The syndication API only ever reports the `_normal` rendition, which is 48×48 — blurry on retina, since the avatar renders at 48 CSS pixels. This swaps it for `_400x400`, the same asset at 400px. It also avoids a class of broken avatars, as X purges `_normal` renditions of older assets more aggressively.
+
+This is a mitigation, not a cure: if the underlying asset is gone, every rendition 404s. URLs that don't match the expected shape are returned unchanged.

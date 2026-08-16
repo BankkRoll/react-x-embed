@@ -1,25 +1,25 @@
 # Introduction
 
-`react-tweet` allows you to embed tweets in your React application when using Next.js, Vite, and more. This library does not require using the Twitter API. Tweets can be rendered statically, preventing the need to include an iframe and additional client-side JavaScript.
-
-You can see how it in action in [react-tweet-next.vercel.app/light/2040511285998313827](https://react-tweet-next.vercel.app/light/2040511285998313827). Replace the tweet ID in the URL to see other tweets.
+`react-x-embed` allows you to embed X (Twitter) posts in your React application when using Next.js, Vite, and more. This library does not require an API key. Posts can be rendered statically, preventing the need to include an iframe and additional client-side JavaScript.
 
 This library is fully compatible with React Server Components. [Learn more](https://nextjs.org/docs/getting-started/react-essentials#server-components).
 
+It is a fork of [vercel/react-tweet](https://github.com/vercel/react-tweet). See [what's different](#whats-different-from-react-tweet) below.
+
 ## Installation
 
-Install `react-tweet` using your package manager of choice:
+Install `react-x-embed` using your package manager of choice:
 
 ```bash
-pnpm add react-tweet
+pnpm add react-x-embed
 ```
 
 ```bash
-yarn add react-tweet
+yarn add react-x-embed
 ```
 
 ```bash
-npm install react-tweet
+npm install react-x-embed
 ```
 
 Now follow the usage instructions for your framework or builder:
@@ -27,7 +27,27 @@ Now follow the usage instructions for your framework or builder:
 - [Next.js](/next)
 - [Vite](/vite)
 
-> **Important**: Before going to production, we recommend [enabling cache for the Twitter API](#enabling-cache-for-the-twitter-api) as server IPs might get rate limited by Twitter.
+> **Important**: Before going to production, we recommend [enabling cache for the X API](#enabling-cache-for-the-x-api) as server IPs might get rate limited by X.
+
+## What's different from react-tweet
+
+Every change is anchored to a real payload. The repo ships captured syndication responses alongside X's own rendered HTML, CSS, and computed geometry for the same posts, so layout is measured against X rather than guessed at.
+
+**Crashes fixed.** Videos served without an mp4 rendition took down the page, because the player dereferenced a variant that didn't exist. Malformed payloads did the same: a deleted or suspended account returns a post-shaped object with no `user`, throwing on the first property access. Responses are now [validated](/api-reference#isvalidtweet) before rendering and degrade to the "not found" state.
+
+**Layout matched to X.** A 9:16 video rendered at 177.8% padding — nearly twice as tall as the embed is wide. It's now capped the way X caps it.
+
+**Video that plays.** X's HLS rendition is offered as a `<source>` before the mp4, fixing playback in Safari, and the `AbortError` on the play button is gone.
+
+**Sharper images.** Avatars use the 400px rendition instead of the 48×48 one, photos ship a `srcset`, and each image's box is filled with the dominant colour X computed for it while it loads.
+
+**Link previews.** The syndication API returns a fully populated card for any post sharing a link — title, description, domain, image. It was never rendered. See [`TweetCard`](/twitter-theme/api-reference#tweetcard).
+
+**Accessible and overridable.** Interactive targets meet the WCAG 2.2 minimum, and container `margin` and `max-width` can actually be overridden — previously they tied on specificity with consumer utility classes, so whichever stylesheet loaded last won.
+
+### What it still can't do
+
+The syndication API is the only endpoint that works without credentials, and it returns one post at a time. Timelines, profiles, search, threads and reposts are out of reach — every other endpoint is credential-gated or returns nothing. A repost resolves to the original post and can't be distinguished from it. Engagement data is limited to `favorite_count` and `conversation_count`.
 
 ## Choosing a theme
 
@@ -63,9 +83,11 @@ In CSS Modules, you can use the `:global` selector to update the CSS variables u
 
 For Global CSS the usage of `:global` is not necessary.
 
-## Enabling cache for the Twitter API
+## Enabling cache for the X API
 
-Rendering tweets requires making a call to Twitter's syndication API. Getting rate limited by that API is very hard but it's possible if you're relying only on the endpoint we provide for SWR (`react-tweet.vercel.app/api/tweet/:id`) as the IPs of the server are making many requests to the syndication API. This also applies to RSC where the API endpoint is not required but the server is still making the request from the same IP.
+Rendering posts requires making a call to X's syndication API. Getting rate limited by that API is very hard but it's possible if you're relying only on the default SWR endpoint (`react-tweet.vercel.app/api/tweet/:id`) as the IPs of the server are making many requests to the syndication API. This also applies to RSC where the API endpoint is not required but the server is still making the request from the same IP.
+
+> **Note**: that default endpoint is upstream's public deployment, kept so client-side rendering works with zero configuration. It is a shared, rate-limited service that this project does not operate — host your own route before going to production.
 
 To prevent this, you can use a db like Redis or [Vercel KV](https://vercel.com/docs/storage/vercel-kv) to cache the tweets. For example using [Vercel KV](https://vercel.com/docs/storage/vercel-kv):
 
@@ -120,6 +142,6 @@ const Page = async ({ params }: { params: Promise<{ tweet: string }> }) => {
 export default Page
 ```
 
-You can see it working at [react-tweet-next.vercel.app/light/vercel-kv/2040511285998313827](https://react-tweet-next.vercel.app/light/vercel-kv/2040511285998313827) ([source](https://github.com/vercel/react-tweet/blob/main/apps/next-app/app/light/vercel-kv/%5Btweet%5D/page.tsx)).
+The full example lives in [`apps/next-app`](https://github.com/BankkRoll/react-x-embed/blob/main/apps/next-app/app/light/vercel-kv/%5Btweet%5D/page.tsx), which you can run locally with `pnpm dev --filter=next-app...`.
 
 If you're using Next.js then using [`unstable_cache`](/next#enabling-cache) works too.

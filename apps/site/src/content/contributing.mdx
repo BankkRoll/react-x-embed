@@ -1,7 +1,39 @@
 # Contributing
 
-To contribute, clone the [`react-tweet` repository](https://github.com/vercel/react-tweet) and run the [Next.js test app](/next#running-the-test-app) to start an app locally that uses the [`react-tweet` package](https://github.com/vercel/react-tweet/blob/main/packages/react-tweet). Any changes you make to the package will be reflected in the test app.
+To contribute, clone the [`react-x-embed` repository](https://github.com/BankkRoll/react-x-embed) and run the [Next.js test app](/next#running-the-test-app) to start an app locally that uses the [`react-x-embed` package](https://github.com/BankkRoll/react-x-embed/blob/main/packages/react-x-embed). Any changes you make to the package will be reflected in the test app.
 
-Once you're done making changes, [submit a pull request](https://github.com/vercel/react-tweet/compare). You can open a pull request with unsigned commits, but for it to be accepted all commits must be [verified](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits), so make sure to sign your commits if you want the PR to be merged. 
+```bash
+pnpm install
+pnpm dev --filter=next-app...
+```
 
-It's recommended to [open an issue](https://github.com/vercel/react-tweet/issues/new) first before making any major changes to the package so that we can discuss the changes before you start working on them.
+## Running the tests
+
+```bash
+pnpm test --filter=react-x-embed
+```
+
+Tests run against captured syndication payloads in [`packages/react-x-embed/test/fixtures`](https://github.com/BankkRoll/react-x-embed/tree/main/packages/react-x-embed/test/fixtures), so they need no network access and don't depend on a post still existing.
+
+Each fixture pins a distinct response shape the renderer has to survive — multi-photo grids, video with several renditions, mixed video and photo, quoted posts with and without their own media, truncated note posts, and link cards. Alongside them are `*.x-embed.html`, `*.x-embed.css` and `*.x-embed.geometry.json`: X's own rendered markup, shipped stylesheet rules, and computed box geometry for the same posts, captured from `platform.twitter.com`.
+
+**If you change layout, measure against those captures rather than adjusting by eye.** The aspect-ratio assertions in the test suite come from them directly.
+
+## Adding a fixture
+
+If you hit a post shape that isn't covered, add it. Fetch the syndication response, save it as `test/fixtures/<name>.json`, and register it in `test/fixtures/index.ts` with a short note on the render path it exercises. A fixture with no distinct `covers` reason is just slower CI.
+
+## Before opening a pull request
+
+```bash
+pnpm lint --filter=react-x-embed
+pnpm build --filter=react-x-embed
+```
+
+The syndication API is undocumented and changes without notice, so changes that touch payload handling should degrade rather than throw. [`isValidTweet`](/api-reference#isvalidtweet) exists because every past shape change surfaced as a crash inside rendering — treat a new required field as a bug, not a fix.
+
+Once you're done, [submit a pull request](https://github.com/BankkRoll/react-x-embed/compare). It's recommended to [open an issue](https://github.com/BankkRoll/react-x-embed/issues/new) first before making any major changes, so the approach can be discussed before you spend time on it.
+
+## Upstream
+
+This project is a fork of [vercel/react-tweet](https://github.com/vercel/react-tweet). If your change is a general fix that would benefit that project too, consider sending it there as well — note that upstream requires [verified commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).

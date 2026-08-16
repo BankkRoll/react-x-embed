@@ -2,13 +2,13 @@
 
 ## Installation
 
-> Next.js 13.2.1 or higher is required in order to use `react-tweet`.
+> Next.js 13.2.1 or higher is required in order to use `react-x-embed`.
 
 Follow the [installation docs in the Introduction](/#installation).
 
 ## Usage
 
-In any component, import `Tweet` from `react-tweet` and use it like so:
+In any component, import `Tweet` from `react-x-embed` and use it like so:
 
 ```tsx copy
 import { Tweet } from 'react-x-embed'
@@ -27,14 +27,14 @@ You can learn more about `Tweet` in the [Twitter theme docs](/twitter-theme). An
 If you see an error saying that CSS can't be imported from `node_modules` in the `pages` directory. Add the following config to `next.config.js`:
 
 ```js copy
-transpilePackages: ['react-tweet']
+transpilePackages: ['react-x-embed']
 ```
 
 The error won't happen if the App Router is enabled, where [Next.js supports CSS imports from `node_modules`](https://github.com/vercel/next.js/discussions/27953#discussioncomment-3978605).
 
 ### Enabling cache
 
-It's recommended to enable cache for the Twitter API if you intend to go to production. This is how you can do it with [`unstable_cache`](https://nextjs.org/docs/app/api-reference/functions/unstable_cache):
+It's recommended to enable cache for the X API if you intend to go to production. This is how you can do it with [`unstable_cache`](https://nextjs.org/docs/app/api-reference/functions/unstable_cache):
 
 ```tsx
 import { Suspense } from 'react'
@@ -70,13 +70,13 @@ const Page = async ({ params }: { params: Promise<{ tweet: string }> }) => {
 export default Page
 ```
 
-This can prevent getting your server IPs rate limited if they are making too many requests to the Twitter API.
+This can prevent getting your server IPs rate limited if they are making too many requests to the X API.
 
 ## Advanced usage
 
 ### Manual data fetching
 
-You can use the [`getTweet`](/api-reference#gettweet) function from `react-tweet/api` to fetch the tweet manually. This is useful for SSG pages and for other [Next.js data fetching methods](https://nextjs.org/docs/basic-features/data-fetching/overview) in the `pages` directory.
+You can use the [`getTweet`](/api-reference#gettweet) function from `react-x-embed/api` to fetch the tweet manually. This is useful for SSG pages and for other [Next.js data fetching methods](https://nextjs.org/docs/basic-features/data-fetching/overview) in the `pages` directory.
 
 For example, using `getStaticProps` in `pages/[tweet].tsx` to fetch the tweet and send it as props to the page component:
 
@@ -151,15 +151,15 @@ export default function Page() {
 
 ## Running the test app
 
-Clone the [`react-tweet`](https://github.com/vercel/react-tweet) repository and then run the following command:
+Clone the [`react-x-embed`](https://github.com/BankkRoll/react-x-embed) repository and then run the following command:
 
 ```bash copy
 pnpm install && pnpm dev --filter=next-app...
 ```
 
-The app will be up and running at http://localhost:3001 for the [Next.js app example](https://github.com/vercel/react-tweet/tree/main/apps/next-app).
+The app will be up and running at http://localhost:3001 for the [Next.js app example](https://github.com/BankkRoll/react-x-embed/tree/main/apps/next-app).
 
-The app shows the usage of `react-tweet` in different scenarios:
+The app shows the usage of `react-x-embed` in different scenarios:
 
 - [localhost:3001/light/2040511285998313827](http://localhost:3001/light/2040511285998313827) renders the tweet in the app router.
 - [localhost:3001/dark/2040511285998313827](http://localhost:3001/dark/2040511285998313827) renders the tweet using SSG in the pages directory.
@@ -169,4 +169,4 @@ The app shows the usage of `react-tweet` in different scenarios:
 - [localhost:3001/light/cache/2040511285998313827](http://localhost:3001/light/suspense/2040511285998313827) renders the tweet while caching the tweet data with [`unstable_cache`](https://nextjs.org/docs/app/api-reference/functions/unstable_cache).
 - [localhost:3001/light/vercel-kv/2040511285998313827](http://localhost:3001/light/suspense/2040511285998313827) renders the tweet while caching the tweet data with [Vercel KV](https://vercel.com/docs/storage/vercel-kv).
 
-The source code for `react-tweet` is imported from [packages/react-tweet](https://github.com/vercel/react-tweet/tree/main/packages/react-tweet) and any changes you make to it will be reflected in the app immediately.
+The source code for `react-x-embed` is imported from [packages/react-x-embed](https://github.com/BankkRoll/react-x-embed/tree/main/packages/react-x-embed) and any changes you make to it will be reflected in the app immediately.

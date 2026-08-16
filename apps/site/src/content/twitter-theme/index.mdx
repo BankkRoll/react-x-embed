@@ -1,10 +1,12 @@
 # Twitter Theme
 
-This is the theme you'll see in [publish.twitter.com](https://publish.twitter.com/?query=https%3A%2F%2Ftwitter.com%2FInterior%2Fstatus%2F463440424141459456&widget=Tweet) and the default theme included in `react-tweet`.
+This is the theme you'll see in [publish.twitter.com](https://publish.twitter.com/?query=https%3A%2F%2Ftwitter.com%2FInterior%2Fstatus%2F463440424141459456&widget=Tweet) and the default theme included in `react-x-embed`.
+
+Its layout is verified against X's own embed: the repo captures the rendered HTML, shipped CSS, and computed geometry from `platform.twitter.com` for a set of real tweets, and the aspect ratios here are taken from those measurements rather than chosen by eye.
 
 ## Usage
 
-In any component, import `Tweet` from `react-tweet` and use it like so:
+In any component, import `Tweet` from `react-x-embed` and use it like so:
 
 ```tsx copy
 import { Tweet } from 'react-x-embed'
@@ -14,6 +16,19 @@ export default function Page() {
 }
 ```
 
+## Overriding styles
+
+`margin` and `max-width` on the container are declared inside `:where()`, which holds them at zero specificity. Any selector you write wins, regardless of whether your CSS loads before or after the package's:
+
+```css
+.my-wrapper .react-tweet-theme {
+  margin: 0;
+  max-width: 100%;
+}
+```
+
+Everything else is themed through [CSS custom properties](#css-variables).
+
 ## Troubleshooting
 
-Currently, `react-tweet` uses CSS Modules to scope the CSS of each component, so the bundler where it's used needs to support CSS Modules. If you get issues about your bundler not recognizing CSS Modules, please open an issue as we would like to know how well supported this is.
+`react-x-embed` uses CSS Modules to scope the CSS of each component, so the bundler where it's used needs to support CSS Modules. Most do; Node's own ESM loader does not, which is why importing the package directly in a plain Node script fails with `Unknown file extension ".css"`. If your bundler reports a problem, please [open an issue](https://github.com/BankkRoll/react-x-embed/issues).

@@ -1,4 +1,7 @@
 import type {
+  CardBindingValue,
+  CardImageValue,
+  TweetCard,
   TweetBase,
   Tweet,
   QuotedTweet,
@@ -266,7 +269,83 @@ function fixRange(tweet: TweetBase, entities: EntityWithType[]) {
   }
 }
 
-export type EnrichedTweet = Omit<Tweet, 'entities' | 'quoted_tweet'> & {
+/** A link preview, flattened from a tweet's card bindings into render-ready fields. */
+export type EnrichedCard = {
+  /** Destination of the shared link — the t.co URL the card points at. */
+  url: string
+  /** Display domain, e.g. `nextjs.org`. */
+  domain?: string
+  title?: string
+  description?: string
+  image?: CardImageValue
+  /**
+   * Whether X would render this as a wide hero image rather than a small
+   * thumbnail beside the text.
+   */
+  large: boolean
+}
+
+const getBindingString = (
+  bindings: Record<string, CardBindingValue>,
+  key: string
+): string | undefined => {
+  const value = bindings[key]
+  return value?.type === 'STRING' ? value.string_value : undefined
+}
+
+/**
+ * Picks the smallest card image that still covers the embed's width.
+ *
+ * X ships up to seven renditions of the same asset; `_original` can be
+ * 1600x900, which is far more than a ~500px embed needs.
+ */
+const getBindingImage = (
+  bindings: Record<string, CardBindingValue>,
+  keys: string[]
+): CardImageValue | undefined => {
+  for (const key of keys) {
+    const value = bindings[key]
+    if (value?.type === 'IMAGE' && value.image_value?.url) {
+      return value.image_value
+    }
+  }
+  return undefined
+}
+
+/**
+ * Flattens a tweet's card into the handful of fields needed to render a link
+ * preview, or returns `undefined` when there's nothing worth showing.
+ *
+ * X models cards as an untyped `binding_values` bag whose keys vary by card
+ * type, so this reads defensively and treats every field as optional. Cards
+ * without a title (`player`, `unified_card`, and X's various ad formats) are
+ * skipped — the link is already rendered inline in the tweet text.
+ */
+export const enrichCard = (card?: TweetCard): EnrichedCard | undefined => {
+  if (!card?.binding_values) return undefined
+
+  const bindings = card.binding_values
+  const title = getBindingString(bindings, 'title')
+  if (!title) return undefined
+
+  const large = card.name === 'summary_large_image' || card.name === 'photo'
+
+  return {
+    url: getBindingString(bindings, 'card_url') ?? card.url,
+    domain: getBindingString(bindings, 'vanity_url') ?? getBindingString(bindings, 'domain'),
+    title,
+    description: getBindingString(bindings, 'description'),
+    image: getBindingImage(
+      bindings,
+      large
+        ? ['summary_photo_image', 'photo_image_full_size', 'thumbnail_image_large']
+        : ['thumbnail_image', 'summary_photo_image_small', 'photo_image_full_size_small']
+    ),
+    large,
+  }
+}
+
+export type EnrichedTweet = Omit<Tweet, 'entities' | 'quoted_tweet' | 'card'> & {
   url: string
   user: {
     url: string
@@ -277,6 +356,7 @@ export type EnrichedTweet = Omit<Tweet, 'entities' | 'quoted_tweet'> & {
   in_reply_to_url?: string
   entities: Entity[]
   quoted_tweet?: EnrichedQuotedTweet
+  card?: EnrichedCard
 }
 
 export type EnrichedQuotedTweet = Omit<QuotedTweet, 'entities'> & {
@@ -301,6 +381,7 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
     ? getInReplyToUrl(tweet)
     : undefined,
   entities: getEntities(tweet),
+  card: enrichCard(tweet.card),
   quoted_tweet: tweet.quoted_tweet
     ? {
         ...tweet.quoted_tweet,

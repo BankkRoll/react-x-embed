@@ -1,0 +1,93 @@
+.root {
+  margin-top: 0.75rem;
+  display: flex;
+  overflow: hidden;
+  border: var(--tweet-border);
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+}
+.root:hover {
+  background-color: var(--tweet-color-blue-secondary-hover);
+}
+
+/* summary_large_image — hero image stacked above the text */
+.large {
+  flex-direction: column;
+}
+
+/* summary — square thumbnail beside the text */
+.compact {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
+  background: var(--tweet-skeleton-gradient);
+}
+.large .imageWrapper {
+  width: 100%;
+  border-bottom: var(--tweet-border);
+}
+.compact .imageWrapper {
+  /* A square thumbnail that keeps its width as the text column flexes. */
+  width: 129px;
+  flex-shrink: 0;
+  border-inline-end: var(--tweet-border);
+}
+
+/* Reserves the image's aspect ratio before it loads, so the card doesn't
+   reflow the tweet below it. */
+.imageRatio {
+  width: 100%;
+  display: block;
+}
+.compact .imageRatio {
+  padding-bottom: 100%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.125rem;
+  padding: 0.75rem;
+  overflow: hidden;
+  font-size: var(--tweet-body-font-size);
+  line-height: var(--tweet-body-line-height);
+}
+
+.domain,
+.description {
+  color: var(--tweet-font-color-secondary);
+}
+
+.domain,
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}

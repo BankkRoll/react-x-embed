@@ -10,6 +10,7 @@ import { describe, it } from 'node:test'
 
 import type { MediaDetails, MediaVideo } from '../src/api/index.js'
 import {
+  enrichCard,
   enrichTweet,
   getHlsVideo,
   getMediaUrl,
@@ -118,6 +119,56 @@ describe('getMediaUrl', () => {
       assert.equal(url.searchParams.get('name'), size)
       assert.ok(url.searchParams.get('format'))
     }
+  })
+})
+
+describe('enrichCard', () => {
+  const card = byName('card')
+
+  it('flattens X binding values into render-ready fields', () => {
+    const enriched = enrichCard(card.card)
+    assert.ok(enriched, 'summary_large_image card should be rendered')
+    assert.equal(enriched.title, 'Next.js 13.2')
+    assert.equal(enriched.domain, 'nextjs.org')
+    assert.ok(enriched.description?.startsWith('Next.js 13.2 introduces'))
+    assert.ok(enriched.url.startsWith('https://t.co/'))
+    assert.equal(enriched.large, true)
+  })
+
+  it('prefers a rendition sized for the embed over the original', () => {
+    // The same asset ships at up to 1600x900; an embed is roughly 500px wide.
+    const image = enrichCard(card.card)!.image
+    assert.ok(image, 'card should carry an image')
+    assert.ok(image.width <= 800, `picked a ${image.width}px rendition`)
+    assert.ok(image.url.startsWith('https://pbs.twimg.com/card_img/'))
+  })
+
+  it('is exposed on the enriched tweet', () => {
+    assert.equal(enrichTweet(card).card?.title, 'Next.js 13.2')
+  })
+
+  it('skips cards with no title, and tweets with no card', () => {
+    // player/unified_card and ad formats carry no title; the link is already
+    // rendered inline in the tweet text.
+    assert.equal(enrichCard(undefined), undefined)
+    assert.equal(enrichCard({ name: 'player', url: 'x', binding_values: {} }), undefined)
+    assert.equal(enrichTweet(byName('fortnite')).card, undefined)
+  })
+
+  it('survives a malformed binding bag', () => {
+    const malformed = {
+      name: 'summary_large_image',
+      url: 'https://t.co/x',
+      binding_values: {
+        title: { type: 'STRING', string_value: 'Only a title' },
+        thumbnail_image: { type: 'IMAGE' },
+      },
+    } as unknown as Parameters<typeof enrichCard>[0]
+
+    const enriched = enrichCard(malformed)
+    assert.equal(enriched?.title, 'Only a title')
+    assert.equal(enriched?.image, undefined)
+    assert.equal(enriched?.domain, undefined)
   })
 })
 

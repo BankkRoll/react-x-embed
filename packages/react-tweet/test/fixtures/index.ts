@@ -9,6 +9,7 @@
 import type { Tweet } from '../../src/api/index.js'
 
 import blouu from './blouu.json' with { type: 'json' }
+import card from './card.json' with { type: 'json' }
 import catalog from './catalog.json' with { type: 'json' }
 import coyote from './coyote.json' with { type: 'json' }
 import fortnite from './fortnite.json' with { type: 'json' }
@@ -44,6 +45,11 @@ export const fixtures: Fixture[] = [
   },
   { name: 'scam', tweet: scam as unknown as Tweet, covers: 'no own media, quoted tweet with photo' },
   { name: 'blouu', tweet: blouu as unknown as Tweet, covers: 'own photo AND a quoted tweet' },
+  {
+    name: 'card',
+    tweet: card as unknown as Tweet,
+    covers: 'summary_large_image link preview, no own media',
+  },
 ]
 
 export const byName = (name: string): Tweet => {

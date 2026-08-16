@@ -1,3 +1,4 @@
+import type { TweetCard } from './card.js'
 import type { TweetEditControl } from './edit.js'
 import type { Indices, TweetEntities } from './entities.js'
 import type { MediaDetails } from './media.js'
@@ -69,6 +70,11 @@ export interface Tweet extends TweetBase {
   in_reply_to_user_id_str?: string
   parent?: TweetParent
   possibly_sensitive?: boolean
+  /**
+   * Preview of a link shared in the tweet. Present whenever the linked page
+   * exposes enough metadata for X to build one.
+   */
+  card?: TweetCard
 }
 
 /**

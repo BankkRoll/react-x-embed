@@ -4,6 +4,7 @@ import { TweetContainer } from './tweet-container.js'
 import { TweetHeader } from './tweet-header.js'
 import { TweetInReplyTo } from './tweet-in-reply-to.js'
 import { TweetBody } from './tweet-body.js'
+import { TweetCard } from './tweet-card.js'
 import { TweetMedia } from './tweet-media.js'
 import { TweetInfo } from './tweet-info.js'
 import { TweetActions } from './tweet-actions.js'
@@ -27,7 +28,11 @@ export const EmbeddedTweet = ({ tweet: t, components }: Props) => {
       <TweetBody tweet={tweet} />
       {tweet.mediaDetails?.length ? (
         <TweetMedia tweet={tweet} components={components} />
-      ) : null}
+      ) : (
+        // A tweet's own media takes precedence: X drops the link preview when
+        // both are present, and so does the syndication payload in practice.
+        <TweetCard tweet={tweet} />
+      )}
       {tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} components={components} />}
       <TweetInfo tweet={tweet} />
       <TweetActions tweet={tweet} />

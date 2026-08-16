@@ -13,7 +13,10 @@ import {
   enrichCard,
   enrichTweet,
   getHlsVideo,
+  getMediaBackgroundColor,
+  getMediaSrcSet,
   getMediaUrl,
+  isMediaAvailable,
   getMp4Video,
   getMp4Videos,
   normalizeAvatarUrl,
@@ -119,6 +122,74 @@ describe('getMediaUrl', () => {
       assert.equal(url.searchParams.get('name'), size)
       assert.ok(url.searchParams.get('format'))
     }
+  })
+})
+
+describe('getMediaSrcSet', () => {
+  it('offers wider renditions with their real pixel widths', () => {
+    const media = byName('fortnite').mediaDetails![0]
+    const srcSet = getMediaSrcSet(media)
+    assert.ok(srcSet, 'fixture advertises several sizes')
+
+    const widths = srcSet.split(', ').map((c) => Number(c.split(' ')[1].replace('w', '')))
+    assert.deepEqual(widths, [680, 1200, 1920])
+    // Each candidate must name the rendition it actually points at.
+    assert.ok(srcSet.includes('name=small'))
+    assert.ok(srcSet.includes('name=large'))
+  })
+
+  it('drops duplicate widths so the browser has a real choice', () => {
+    // scubaryan reports the same width for medium and large.
+    const media = byName('scubaryan').mediaDetails![0]
+    const srcSet = getMediaSrcSet(media)
+    const widths = srcSet!.split(', ').map((c) => c.split(' ')[1])
+    assert.equal(new Set(widths).size, widths.length)
+  })
+
+  it('returns undefined when there is nothing to choose between', () => {
+    assert.equal(getMediaSrcSet({} as MediaDetails), undefined)
+    assert.equal(
+      getMediaSrcSet({ sizes: { small: { w: 680 } } } as unknown as MediaDetails),
+      undefined
+    )
+  })
+})
+
+describe('getMediaBackgroundColor', () => {
+  it('reads the dominant colour X computed for the image', () => {
+    // Reported on the parallel `photos` array, matched by URL — not on
+    // mediaDetails, whose ext_media_color is never populated here.
+    const tweet = byName('fortnite')
+    const color = getMediaBackgroundColor(tweet.mediaDetails![0], tweet.photos)
+    assert.match(color ?? '', /^rgb\(\d+, \d+, \d+\)$/)
+  })
+
+  it('returns undefined when no palette is present', () => {
+    assert.equal(getMediaBackgroundColor({} as MediaDetails), undefined)
+    // A video has no entry in `photos`, so there is nothing to match.
+    const tweet = byName('scubaryan')
+    assert.equal(getMediaBackgroundColor(tweet.mediaDetails![0], tweet.photos), undefined)
+  })
+})
+
+describe('isMediaAvailable', () => {
+  it('treats every captured fixture as available', () => {
+    for (const { name, tweet } of fixtures) {
+      for (const media of tweet.mediaDetails ?? []) {
+        assert.ok(isMediaAvailable(media), `${name} media reported unavailable`)
+      }
+    }
+  })
+
+  it('rejects media withheld after publication', () => {
+    const withheld = {
+      ext_media_availability: { status: 'Unavailable' },
+    } as unknown as MediaDetails
+    assert.equal(isMediaAvailable(withheld), false)
+  })
+
+  it('assumes available when X omits the field', () => {
+    assert.equal(isMediaAvailable({} as MediaDetails), true)
   })
 })
 

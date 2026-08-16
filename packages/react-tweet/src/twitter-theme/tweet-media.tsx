@@ -3,7 +3,10 @@ import clsx from 'clsx'
 import {
   type EnrichedTweet,
   type EnrichedQuotedTweet,
+  getMediaBackgroundColor,
+  getMediaSrcSet,
   getMediaUrl,
+  isMediaAvailable,
 } from '../utils.js'
 import { MediaDetails } from '../api/index.js'
 import type { TwitterComponents } from './types.js'
@@ -50,8 +53,17 @@ type Props = {
 }
 
 export const TweetMedia = ({ tweet, components, quoted }: Props) => {
-  const length = tweet.mediaDetails?.length ?? 0
+  // Media withheld after publication — DMCA takedowns, region blocks — still
+  // appears in the payload, but its URLs 404. Dropping it beats rendering a
+  // broken image.
+  const mediaDetails = tweet.mediaDetails?.filter(isMediaAvailable)
+  const length = mediaDetails?.length ?? 0
   const Img = components?.MediaImg ?? MediaImg
+  // Only a full tweet carries the parallel `photos` array holding each image's
+  // dominant colour; a quoted tweet doesn't.
+  const photos = 'photos' in tweet ? tweet.photos : undefined
+
+  if (!length) return null
 
   return (
     <div className={clsx(s.root, !quoted && s.rounded)}>
@@ -63,7 +75,7 @@ export const TweetMedia = ({ tweet, components, quoted }: Props) => {
           length > 4 && s.grid2x2
         )}
       >
-        {tweet.mediaDetails?.map((media) => (
+        {mediaDetails?.map((media) => (
           <Fragment key={media.media_url_https}>
             {media.type === 'photo' ? (
               <a
@@ -75,10 +87,15 @@ export const TweetMedia = ({ tweet, components, quoted }: Props) => {
               >
                 <div
                   className={s.skeleton}
-                  style={getSkeletonStyle(media, length)}
+                  style={{
+                    ...getSkeletonStyle(media, length),
+                    backgroundColor: getMediaBackgroundColor(media, photos),
+                  }}
                 />
                 <Img
                   src={getMediaUrl(media, 'small')}
+                  srcSet={getMediaSrcSet(media)}
+                  sizes={length > 1 ? '(max-width: 550px) 50vw, 275px' : '550px'}
                   alt={media.ext_alt_text || 'Image'}
                   className={s.image}
                   draggable
@@ -88,7 +105,10 @@ export const TweetMedia = ({ tweet, components, quoted }: Props) => {
               <div key={media.media_url_https} className={s.mediaContainer}>
                 <div
                   className={s.skeleton}
-                  style={getSkeletonStyle(media, length)}
+                  style={{
+                    ...getSkeletonStyle(media, length),
+                    backgroundColor: getMediaBackgroundColor(media, photos),
+                  }}
                 />
                 <TweetMediaVideo tweet={tweet} media={media} />
               </div>

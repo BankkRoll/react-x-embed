@@ -14,6 +14,7 @@ import type {
   MediaEntity,
   MediaAnimatedGif,
   MediaVideo,
+  TweetPhoto,
 } from './api/index.js'
 
 export { formatDate } from './date-utils.js'
@@ -75,6 +76,79 @@ const HLS_CONTENT_TYPE = 'application/x-mpegURL'
 /**
  * All mp4 renditions of a video, sorted by descending bitrate.
  */
+/**
+ * Builds a `srcset` for a media item from the renditions X advertises.
+ *
+ * The renderer requests the `small` (680px wide) rendition, which is soft on
+ * any retina display. Offering the wider renditions with their real pixel
+ * widths lets the browser choose based on device pixel ratio, and costs
+ * nothing on 1x screens.
+ *
+ * Returns `undefined` when X reports no usable sizes.
+ */
+export const getMediaSrcSet = (media: MediaDetails): string | undefined => {
+  const sizes = media.sizes
+  if (!sizes) return undefined
+
+  const entries = (['small', 'medium', 'large'] as const)
+    .map((size) => ({ size, width: sizes[size]?.w }))
+    .filter((entry): entry is { size: 'small' | 'medium' | 'large'; width: number } =>
+      Number.isFinite(entry.width) && (entry.width as number) > 0
+    )
+
+  // Duplicate widths (X often reports the same width for medium and large)
+  // would make the browser's selection arbitrary.
+  const seen = new Set<number>()
+  const candidates = entries.filter((entry) => {
+    if (seen.has(entry.width)) return false
+    seen.add(entry.width)
+    return true
+  })
+
+  if (candidates.length < 2) return undefined
+
+  return candidates
+    .map(({ size, width }) => `${getMediaUrl(media, size)} ${width}w`)
+    .join(', ')
+}
+
+/**
+ * A CSS colour for the placeholder shown while media loads.
+ *
+ * X computes each image's dominant colour, so the space reserved for it can be
+ * filled with something close to the final image instead of an empty box.
+ *
+ * NOTE: the syndication API reports this on the parallel `photos` array rather
+ * than on `mediaDetails`, matched by URL. `mediaDetails[].ext_media_color`
+ * exists in the response type but is never populated here, and `photos` omits
+ * video entries entirely.
+ */
+export const getMediaBackgroundColor = (
+  media: Pick<MediaDetails, 'media_url_https' | 'ext_media_color'>,
+  photos?: TweetPhoto[]
+): string | undefined => {
+  const rgb =
+    media.ext_media_color?.palette?.[0]?.rgb ??
+    photos?.find((photo) => photo.url === media.media_url_https)?.backgroundColor
+
+  if (!rgb) return undefined
+
+  const { red, green, blue } = rgb
+  if (![red, green, blue].every((c) => Number.isFinite(c))) return undefined
+
+  return `rgb(${red}, ${green}, ${blue})`
+}
+
+/**
+ * Whether X still serves this media.
+ *
+ * Media can be withheld after the tweet is published — DMCA takedowns and
+ * region blocks both surface here — in which case the URLs 404 and the embed
+ * would show a broken image.
+ */
+export const isMediaAvailable = (media: MediaDetails): boolean =>
+  (media.ext_media_availability?.status ?? 'Available') === 'Available'
+
 export const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
   const variants = media.video_info?.variants ?? []
   const sortedMp4Videos = variants

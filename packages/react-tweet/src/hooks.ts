@@ -47,10 +47,18 @@ export const useTweet = (
     }
   )
 
+  // Without an `id` or an `apiUrl` the SWR key is null, so no request is ever
+  // made. Reporting `isLoading` here would strand consumers on a skeleton that
+  // never resolves — common when the id comes from a dynamic route that hasn't
+  // resolved yet.
+  const willFetch = Boolean(apiUrl || id)
+
   return {
     // If data is `undefined` then it might be the first render where SWR hasn't started doing
     // any work, so we set `isLoading` to `true`.
-    isLoading: Boolean(isLoading || (data === undefined && !error)),
+    isLoading: Boolean(
+      willFetch && (isLoading || (data === undefined && !error))
+    ),
     data,
     error,
   }

@@ -35,6 +35,10 @@ export const Tweet = ({
 }: TweetProps) => {
   const { data, error, isLoading } = useTweet(id, apiUrl, fetchOptions)
 
+  // Nothing to fetch yet — typically an id from a route that hasn't resolved.
+  // Keep showing the fallback rather than the "not found" state, which would
+  // wrongly imply the tweet was looked up and missing.
+  if (!id && !apiUrl) return fallback
   if (isLoading) return fallback
   if (error || !data) {
     const NotFound = components?.TweetNotFound || TweetNotFound

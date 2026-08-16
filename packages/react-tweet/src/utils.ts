@@ -114,6 +114,29 @@ export const getMp4Video = (
   return mp4Videos[1]
 }
 
+/**
+ * Rewrites a profile image URL to a higher-resolution variant.
+ *
+ * The syndication API returns the `_normal` rendition, which is 48x48 — blurry
+ * on any retina display, since the avatar renders at 48 CSS pixels. `_400x400`
+ * is the same asset at 400px.
+ *
+ * It also sidesteps a class of broken avatars: X purges `_normal` renditions of
+ * older assets more aggressively, so tweets predating a user's avatar change
+ * can 404 on the URL the API still reports. This is a mitigation rather than a
+ * cure — if the whole asset is gone, every rendition 404s.
+ *
+ * URLs that don't match the expected profile-image shape are returned as-is.
+ *
+ * @example
+ * normalizeAvatarUrl('https://pbs.twimg.com/profile_images/123/abc_normal.jpg')
+ * // 'https://pbs.twimg.com/profile_images/123/abc_400x400.jpg'
+ */
+export const normalizeAvatarUrl = (src: string): string =>
+  typeof src === 'string'
+    ? src.replace(/(\/profile_images\/.+)_normal(\.\w+)$/, '$1_400x400$2')
+    : src
+
 export const formatNumber = (n: number): string => {
   if (n > 999999) return `${(n / 1000000).toFixed(1)}M`
   if (n > 999) return `${(n / 1000).toFixed(1)}K`

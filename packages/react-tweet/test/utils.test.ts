@@ -15,6 +15,7 @@ import {
   getMediaUrl,
   getMp4Video,
   getMp4Videos,
+  normalizeAvatarUrl,
 } from '../src/utils.js'
 import { byName, fixtures } from './fixtures/index.js'
 
@@ -117,6 +118,33 @@ describe('getMediaUrl', () => {
       assert.equal(url.searchParams.get('name'), size)
       assert.ok(url.searchParams.get('format'))
     }
+  })
+})
+
+describe('normalizeAvatarUrl', () => {
+  it('upgrades the _normal rendition every fixture ships', () => {
+    // The syndication API always reports _normal, which is 48x48 — blurry on
+    // retina, and the rendition X purges most aggressively.
+    for (const { name, tweet } of fixtures) {
+      const src = tweet.user.profile_image_url_https
+      assert.ok(src.includes('_normal'), `${name} fixture should carry _normal`)
+      assert.equal(normalizeAvatarUrl(src), src.replace('_normal', '_400x400'))
+    }
+  })
+
+  it('leaves URLs without the _normal suffix untouched', () => {
+    const already = 'https://pbs.twimg.com/profile_images/123/abc_400x400.jpg'
+    assert.equal(normalizeAvatarUrl(already), already)
+
+    const unrelated = 'https://example.com/avatar_normal.jpg'
+    assert.equal(normalizeAvatarUrl(unrelated), unrelated)
+  })
+
+  it('only rewrites the suffix, never the asset path', () => {
+    const src = 'https://pbs.twimg.com/profile_images/1767351110228918272/3Pndc5OT_normal.png'
+    const out = normalizeAvatarUrl(src)
+    assert.ok(out.startsWith('https://pbs.twimg.com/profile_images/1767351110228918272/'))
+    assert.ok(out.endsWith('.png'))
   })
 })
 

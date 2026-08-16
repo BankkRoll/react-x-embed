@@ -64,8 +64,16 @@ export const getMediaUrl = (
   return url.toString()
 }
 
+/** Quality to select when several mp4 renditions are available. */
+export type VideoQuality = 'low' | 'medium' | 'high'
+
+const HLS_CONTENT_TYPE = 'application/x-mpegURL'
+
+/**
+ * All mp4 renditions of a video, sorted by descending bitrate.
+ */
 export const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
-  const { variants } = media.video_info
+  const variants = media.video_info?.variants ?? []
   const sortedMp4Videos = variants
     .filter((vid) => vid.content_type === 'video/mp4')
     .sort((a, b) => (b.bitrate ?? 0) - (a.bitrate ?? 0))
@@ -73,10 +81,37 @@ export const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
   return sortedMp4Videos
 }
 
-export const getMp4Video = (media: MediaAnimatedGif | MediaVideo) => {
+/**
+ * The HLS (`application/x-mpegURL`) rendition, when X provides one.
+ *
+ * Safari handles HLS natively and plays it far more reliably than X's mp4
+ * renditions, which don't always honour byte-range requests. Offering it as an
+ * additional `<source>` lets the browser pick.
+ */
+export const getHlsVideo = (media: MediaAnimatedGif | MediaVideo) =>
+  media.video_info?.variants?.find((vid) => vid.content_type === HLS_CONTENT_TYPE)
+
+/**
+ * Picks a single mp4 rendition to play.
+ *
+ * `medium` (the default) skips the highest bitrate, which is usually far larger
+ * than an inline embed needs.
+ *
+ * NOTE: some videos are served with an HLS-only variant list. Rather than
+ * returning `undefined` — which crashed the player, since callers dereference
+ * `.url` — this falls back to the HLS rendition.
+ */
+export const getMp4Video = (
+  media: MediaAnimatedGif | MediaVideo,
+  quality: VideoQuality = 'medium'
+) => {
   const mp4Videos = getMp4Videos(media)
-  // Skip the highest quality video and use the next quality
-  return mp4Videos.length > 1 ? mp4Videos[1] : mp4Videos[0]
+
+  if (mp4Videos.length === 0) return getHlsVideo(media)
+  if (quality === 'high' || mp4Videos.length === 1) return mp4Videos[0]
+  if (quality === 'low') return mp4Videos[mp4Videos.length - 1]
+
+  return mp4Videos[1]
 }
 
 export const formatNumber = (n: number): string => {

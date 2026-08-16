@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import type { MediaAnimatedGif, MediaVideo } from '../api/index.js'
 import {
   EnrichedQuotedTweet,
   type EnrichedTweet,
+  getHlsVideo,
   getMediaUrl,
   getMp4Video,
+  type VideoQuality,
 } from '../utils.js'
 import mediaStyles from './tweet-media.module.css'
 import s from './tweet-media-video.module.css'
@@ -15,18 +17,23 @@ import s from './tweet-media-video.module.css'
 type Props = {
   tweet: EnrichedTweet | EnrichedQuotedTweet
   media: MediaAnimatedGif | MediaVideo
+  /** Which mp4 rendition to play when several are available. Defaults to `medium`. */
+  quality?: VideoQuality
 }
 
-export const TweetMediaVideo = ({ tweet, media }: Props) => {
+export const TweetMediaVideo = ({ tweet, media, quality }: Props) => {
   const [playButton, setPlayButton] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [ended, setEnded] = useState(false)
-  const mp4Video = getMp4Video(media)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const mp4Video = getMp4Video(media, quality)
+  const hlsVideo = getHlsVideo(media)
   let timeout = 0
 
   return (
     <>
       <video
+        ref={videoRef}
         className={mediaStyles.image}
         poster={getMediaUrl(media, 'small')}
         controls={!playButton}
@@ -51,7 +58,15 @@ export const TweetMediaVideo = ({ tweet, media }: Props) => {
           setEnded(true)
         }}
       >
-        <source src={mp4Video.url} type={mp4Video.content_type} />
+        {/*
+          HLS is listed first so Safari — which supports it natively and plays
+          it more reliably than X's mp4 renditions — picks it up. Browsers
+          without HLS support skip to the mp4 source below.
+        */}
+        {hlsVideo && hlsVideo.url !== mp4Video?.url && (
+          <source src={hlsVideo.url} type={hlsVideo.content_type} />
+        )}
+        {mp4Video && <source src={mp4Video.url} type={mp4Video.content_type} />}
       </video>
 
       {playButton && (
@@ -60,7 +75,13 @@ export const TweetMediaVideo = ({ tweet, media }: Props) => {
           className={s.videoButton}
           aria-label="View video on X"
           onClick={(e) => {
-            const video = e.currentTarget.previousSibling as HTMLMediaElement
+            // NOTE: resolve the element through a ref, not `previousSibling`.
+            // Hiding the play button re-renders this subtree, and a node
+            // captured beforehand can be detached by the time `play()` settles,
+            // which rejects with "The play() request was interrupted because
+            // the media was removed from the document".
+            const video = videoRef.current
+            if (!video) return
 
             e.preventDefault()
             setPlayButton(false)
@@ -72,6 +93,11 @@ export const TweetMediaVideo = ({ tweet, media }: Props) => {
                 video.focus()
               })
               .catch((error) => {
+                // The element being torn down mid-play is expected during
+                // Strict Mode double-invocation and on unmount; it isn't a
+                // playback failure worth surfacing or reverting the UI for.
+                if (error?.name === 'AbortError') return
+
                 console.error('Error playing video:', error)
                 setPlayButton(true)
                 setIsPlaying(false)

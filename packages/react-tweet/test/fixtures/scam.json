@@ -1,0 +1,199 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 26,
+  "lang": "en",
+  "created_at": "2026-08-16T04:21:54.000Z",
+  "display_text_range": [
+    0,
+    4
+  ],
+  "entities": {},
+  "id_str": "2088843670602862864",
+  "text": "Food",
+  "user": {
+    "id_str": "1824190758544609282",
+    "name": "Scam likely🫦",
+    "screen_name": "veryscamlikely",
+    "is_blue_verified": false,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/2025889787715158016/dSf-u0A0_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2088843670602862864"
+    ],
+    "editable_until_msecs": "1786857714000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "conversation_count": 3,
+  "news_action_type": "conversation",
+  "quoted_tweet": {
+    "favorite_count": 11,
+    "lang": "no",
+    "possibly_sensitive": false,
+    "reply_count": 1,
+    "retweet_count": 0,
+    "created_at": "2026-08-16T04:02:22.000Z",
+    "display_text_range": [
+      0,
+      26
+    ],
+    "entities": {
+      "media": [
+        {
+          "display_url": "pic.x.com/8zTXLCOrBS",
+          "expanded_url": "https://x.com/DrJhonston/status/2088838755000168611/photo/1",
+          "indices": [
+            26,
+            49
+          ],
+          "url": "https://t.co/8zTXLCOrBS"
+        }
+      ]
+    },
+    "id_str": "2088838755000168611",
+    "text": "Brandrisk debut pending 🍿 https://t.co/8zTXLCOrBS",
+    "user": {
+      "id_str": "1442073051546324992",
+      "name": "Miyaru promotion",
+      "screen_name": "DrJhonston",
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2072190543929765888/7SoqLWOJ_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "2088838755000168611"
+      ],
+      "editable_until_msecs": "1786856542000",
+      "edits_remaining": "5",
+      "is_edit_eligible": true
+    },
+    "mediaDetails": [
+      {
+        "display_url": "pic.x.com/8zTXLCOrBS",
+        "expanded_url": "https://x.com/DrJhonston/status/2088838755000168611/photo/1",
+        "ext_media_availability": {
+          "status": "Available"
+        },
+        "indices": [
+          26,
+          49
+        ],
+        "media_url_https": "https://pbs.twimg.com/media/HP0LtUibQAAk83P.jpg",
+        "original_info": {
+          "focus_rects": [
+            {
+              "h": 591,
+              "w": 1056,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "h": 891,
+              "w": 891,
+              "x": 109,
+              "y": 0
+            },
+            {
+              "h": 891,
+              "w": 782,
+              "x": 163,
+              "y": 0
+            },
+            {
+              "h": 891,
+              "w": 446,
+              "x": 331,
+              "y": 0
+            },
+            {
+              "h": 891,
+              "w": 1056,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "height": 891,
+          "width": 1056
+        },
+        "sizes": {
+          "large": {
+            "h": 891,
+            "resize": "fit",
+            "w": 1056
+          },
+          "medium": {
+            "h": 891,
+            "resize": "fit",
+            "w": 1056
+          },
+          "small": {
+            "h": 574,
+            "resize": "fit",
+            "w": 680
+          },
+          "thumb": {
+            "h": 150,
+            "resize": "crop",
+            "w": 150
+          }
+        },
+        "type": "photo",
+        "url": "https://t.co/8zTXLCOrBS"
+      }
+    ],
+    "photos": [
+      {
+        "backgroundColor": {
+          "red": 204,
+          "green": 214,
+          "blue": 221
+        },
+        "cropCandidates": [
+          {
+            "h": 591,
+            "w": 1056,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 891,
+            "w": 891,
+            "x": 109,
+            "y": 0
+          },
+          {
+            "h": 891,
+            "w": 782,
+            "x": 163,
+            "y": 0
+          },
+          {
+            "h": 891,
+            "w": 446,
+            "x": 331,
+            "y": 0
+          },
+          {
+            "h": 891,
+            "w": 1056,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "expandedUrl": "https://x.com/DrJhonston/status/2088838755000168611/photo/1",
+        "url": "https://pbs.twimg.com/media/HP0LtUibQAAk83P.jpg",
+        "width": 1056,
+        "height": 891
+      }
+    ],
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "isEdited": false,
+  "isStaleEdit": false
+}

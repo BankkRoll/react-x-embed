@@ -1,0 +1,227 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 762,
+  "lang": "en",
+  "possibly_sensitive": false,
+  "created_at": "2026-08-16T18:27:28.000Z",
+  "display_text_range": [
+    0,
+    33
+  ],
+  "entities": {
+    "media": [
+      {
+        "display_url": "pic.x.com/s0JuZZthB7",
+        "expanded_url": "https://x.com/BLouu/status/2089056463289254188/photo/1",
+        "indices": [
+          32,
+          55
+        ],
+        "url": "https://t.co/s0JuZZthB7"
+      }
+    ]
+  },
+  "id_str": "2089056463289254188",
+  "text": "I never seen this before wtf 😂😂 https://t.co/s0JuZZthB7",
+  "user": {
+    "id_str": "402468053",
+    "name": "B LOU",
+    "screen_name": "BLouu",
+    "is_blue_verified": true,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/1436461513741586436/fhKMYKQ__normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2089056463289254188"
+    ],
+    "editable_until_msecs": "1786908448000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "mediaDetails": [
+    {
+      "display_url": "pic.x.com/s0JuZZthB7",
+      "expanded_url": "https://x.com/BLouu/status/2089056463289254188/photo/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        32,
+        55
+      ],
+      "media_url_https": "https://pbs.twimg.com/media/HP3Rx6UWoAA2p4O.jpg",
+      "original_info": {
+        "focus_rects": [
+          {
+            "h": 638,
+            "w": 1139,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 638,
+            "w": 638,
+            "x": 5,
+            "y": 0
+          },
+          {
+            "h": 638,
+            "w": 560,
+            "x": 44,
+            "y": 0
+          },
+          {
+            "h": 638,
+            "w": 319,
+            "x": 165,
+            "y": 0
+          },
+          {
+            "h": 638,
+            "w": 1179,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "height": 638,
+        "width": 1179
+      },
+      "sizes": {
+        "large": {
+          "h": 638,
+          "resize": "fit",
+          "w": 1179
+        },
+        "medium": {
+          "h": 638,
+          "resize": "fit",
+          "w": 1179
+        },
+        "small": {
+          "h": 368,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "photo",
+      "url": "https://t.co/s0JuZZthB7"
+    }
+  ],
+  "photos": [
+    {
+      "backgroundColor": {
+        "red": 204,
+        "green": 214,
+        "blue": 221
+      },
+      "cropCandidates": [
+        {
+          "h": 638,
+          "w": 1139,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 638,
+          "w": 638,
+          "x": 5,
+          "y": 0
+        },
+        {
+          "h": 638,
+          "w": 560,
+          "x": 44,
+          "y": 0
+        },
+        {
+          "h": 638,
+          "w": 319,
+          "x": 165,
+          "y": 0
+        },
+        {
+          "h": 638,
+          "w": 1179,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "expandedUrl": "https://x.com/BLouu/status/2089056463289254188/photo/1",
+      "url": "https://pbs.twimg.com/media/HP3Rx6UWoAA2p4O.jpg",
+      "width": 1179,
+      "height": 638
+    }
+  ],
+  "conversation_count": 8,
+  "news_action_type": "conversation",
+  "quoted_tweet": {
+    "favorite_count": 289,
+    "in_reply_to_screen_name": "RockstarGames",
+    "in_reply_to_status_id_str": "132064927123914752",
+    "in_reply_to_user_id_str": "29758446",
+    "lang": "en",
+    "place": {
+      "full_name": "Israel",
+      "id": "2edb6e240797c549"
+    },
+    "reply_count": 6,
+    "retweet_count": 0,
+    "created_at": "2023-10-03T19:31:29.000Z",
+    "display_text_range": [
+      32,
+      42
+    ],
+    "entities": {
+      "user_mentions": [
+        {
+          "id_str": "29758446",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Rockstar Games",
+          "screen_name": "RockstarGames"
+        },
+        {
+          "id_str": "3347019317",
+          "indices": [
+            15,
+            31
+          ],
+          "name": "Vinewood Motors",
+          "screen_name": "Vinewood_motors"
+        }
+      ]
+    },
+    "id_str": "1709290092907348477",
+    "text": "@RockstarGames @Vinewood_motors Finally 🙏",
+    "user": {
+      "id_str": "588540974",
+      "name": "The GTA Base",
+      "screen_name": "TheGTABase",
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle",
+      "verified": false,
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2065128336368549889/qnznq1M1_normal.jpg"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1709290092907348477"
+      ],
+      "editable_until_msecs": "1696365089000",
+      "edits_remaining": "5",
+      "is_edit_eligible": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  "isEdited": false,
+  "isStaleEdit": false
+}

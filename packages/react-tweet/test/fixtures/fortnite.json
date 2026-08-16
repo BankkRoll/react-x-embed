@@ -1,0 +1,167 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 62219,
+  "lang": "en",
+  "possibly_sensitive": false,
+  "created_at": "2026-08-16T17:00:25.000Z",
+  "display_text_range": [
+    0,
+    22
+  ],
+  "entities": {
+    "media": [
+      {
+        "display_url": "pic.x.com/Z3A1h2tpbM",
+        "expanded_url": "https://x.com/Fortnite/status/2089034556079046669/photo/1",
+        "indices": [
+          23,
+          46
+        ],
+        "url": "https://t.co/Z3A1h2tpbM"
+      }
+    ]
+  },
+  "id_str": "2089034556079046669",
+  "text": "Spoiler.V2_TheRealDeal https://t.co/Z3A1h2tpbM",
+  "user": {
+    "id_str": "425871040",
+    "name": "Fortnite",
+    "screen_name": "Fortnite",
+    "is_blue_verified": false,
+    "profile_image_shape": "Square",
+    "verified": false,
+    "verified_type": "Business",
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/2088703625526972416/0D83KU1O_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2089034556079046669"
+    ],
+    "editable_until_msecs": "1786903225000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "mediaDetails": [
+    {
+      "display_url": "pic.x.com/Z3A1h2tpbM",
+      "expanded_url": "https://x.com/Fortnite/status/2089034556079046669/photo/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        23,
+        46
+      ],
+      "media_url_https": "https://pbs.twimg.com/media/HP29xoGbMAAUep-.jpg",
+      "original_info": {
+        "focus_rects": [
+          {
+            "h": 1075,
+            "w": 1920,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 1080,
+            "w": 1080,
+            "x": 84,
+            "y": 0
+          },
+          {
+            "h": 1080,
+            "w": 947,
+            "x": 151,
+            "y": 0
+          },
+          {
+            "h": 1080,
+            "w": 540,
+            "x": 354,
+            "y": 0
+          },
+          {
+            "h": 1080,
+            "w": 1920,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "height": 1080,
+        "width": 1920
+      },
+      "sizes": {
+        "large": {
+          "h": 1080,
+          "resize": "fit",
+          "w": 1920
+        },
+        "medium": {
+          "h": 675,
+          "resize": "fit",
+          "w": 1200
+        },
+        "small": {
+          "h": 383,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "photo",
+      "url": "https://t.co/Z3A1h2tpbM"
+    }
+  ],
+  "photos": [
+    {
+      "backgroundColor": {
+        "red": 204,
+        "green": 214,
+        "blue": 221
+      },
+      "cropCandidates": [
+        {
+          "h": 1075,
+          "w": 1920,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 1080,
+          "w": 1080,
+          "x": 84,
+          "y": 0
+        },
+        {
+          "h": 1080,
+          "w": 947,
+          "x": 151,
+          "y": 0
+        },
+        {
+          "h": 1080,
+          "w": 540,
+          "x": 354,
+          "y": 0
+        },
+        {
+          "h": 1080,
+          "w": 1920,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "expandedUrl": "https://x.com/Fortnite/status/2089034556079046669/photo/1",
+      "url": "https://pbs.twimg.com/media/HP29xoGbMAAUep-.jpg",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "conversation_count": 1593,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}

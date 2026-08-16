@@ -1,0 +1,155 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 745,
+  "lang": "en",
+  "possibly_sensitive": false,
+  "created_at": "2026-08-16T19:12:58.000Z",
+  "display_text_range": [
+    0,
+    229
+  ],
+  "entities": {
+    "media": [
+      {
+        "display_url": "pic.x.com/D4dt9SfAAR",
+        "expanded_url": "https://x.com/ClipArchive_/status/2089067810605719706/video/1",
+        "indices": [
+          205,
+          228
+        ],
+        "url": "https://t.co/D4dt9SfAAR"
+      }
+    ]
+  },
+  "id_str": "2089067915303649684",
+  "text": "Kevin Hart reveals his biggest “flex” in life is his Purple Taco Bell Card granting him free food whenever he wants 😭\n\n“my biggest flex is coming to Taco Bell and using my purple card… watch their faces…” https://t.co/D4dt9SfAAR",
+  "user": {
+    "id_str": "1543390894258356224",
+    "name": "ryan 🤿",
+    "screen_name": "scubaryan_",
+    "is_blue_verified": true,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/1609037429024907264/DvAUf762_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2089067915303649684"
+    ],
+    "editable_until_msecs": "1786911178000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "mediaDetails": [
+    {
+      "additional_media_info": {},
+      "display_url": "pic.x.com/D4dt9SfAAR",
+      "expanded_url": "https://x.com/ClipArchive_/status/2089067810605719706/video/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        205,
+        228
+      ],
+      "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2089067795774660609/img/P_tqBcBMkRYwKFYd.jpg",
+      "original_info": {
+        "focus_rects": [],
+        "height": 720,
+        "width": 848
+      },
+      "sizes": {
+        "large": {
+          "h": 720,
+          "resize": "fit",
+          "w": 848
+        },
+        "medium": {
+          "h": 720,
+          "resize": "fit",
+          "w": 848
+        },
+        "small": {
+          "h": 577,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "video",
+      "url": "https://t.co/D4dt9SfAAR",
+      "video_info": {
+        "aspect_ratio": [
+          53,
+          45
+        ],
+        "duration_millis": 53200,
+        "variants": [
+          {
+            "content_type": "application/x-mpegURL",
+            "url": "https://video.twimg.com/amplify_video/2089067795774660609/pl/_mf3vReuWGr56Ng9.m3u8?tag=14&v=26a"
+          },
+          {
+            "bitrate": 288000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2089067795774660609/vid/avc1/318x270/Peri5V3K605mMw3f.mp4?tag=14"
+          },
+          {
+            "bitrate": 832000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2089067795774660609/vid/avc1/424x360/_XwdJGQqlGM9O-R4.mp4?tag=14"
+          },
+          {
+            "bitrate": 2176000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2089067795774660609/vid/avc1/848x720/BxOIsEhfhpYtLWL_.mp4?tag=14"
+          }
+        ]
+      }
+    }
+  ],
+  "photos": [],
+  "video": {
+    "aspectRatio": [
+      53,
+      45
+    ],
+    "contentType": "media_entity",
+    "durationMs": 53200,
+    "mediaAvailability": {
+      "status": "available"
+    },
+    "poster": "https://pbs.twimg.com/amplify_video_thumb/2089067795774660609/img/P_tqBcBMkRYwKFYd.jpg",
+    "variants": [
+      {
+        "type": "application/x-mpegURL",
+        "src": "https://video.twimg.com/amplify_video/2089067795774660609/pl/_mf3vReuWGr56Ng9.m3u8?tag=14&v=26a"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2089067795774660609/vid/avc1/318x270/Peri5V3K605mMw3f.mp4?tag=14"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2089067795774660609/vid/avc1/424x360/_XwdJGQqlGM9O-R4.mp4?tag=14"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2089067795774660609/vid/avc1/848x720/BxOIsEhfhpYtLWL_.mp4?tag=14"
+      }
+    ],
+    "videoId": {
+      "type": "tweet",
+      "id": "2089067915303649684"
+    },
+    "viewCount": 0
+  },
+  "conversation_count": 7,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}

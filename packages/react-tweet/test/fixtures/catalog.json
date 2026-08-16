@@ -1,0 +1,271 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 450,
+  "lang": "en",
+  "possibly_sensitive": false,
+  "created_at": "2026-08-16T16:39:52.000Z",
+  "display_text_range": [
+    0,
+    243
+  ],
+  "entities": {
+    "media": [
+      {
+        "display_url": "pic.x.com/9dC3wGo6j9",
+        "expanded_url": "https://x.com/catalogging/status/2089029385621823840/video/1",
+        "indices": [
+          244,
+          267
+        ],
+        "url": "https://t.co/9dC3wGo6j9"
+      }
+    ]
+  },
+  "id_str": "2089029385621823840",
+  "text": "It seems that engineer Max Lord and Juice WRLD’s cameraman, Chris Long have been exposed for scamming over $375,000 USD. \n\nIt’s a really long story, but it’s divided into 3 parts. Chris Long also allegedly stole Juice’s songs to make a profit. https://t.co/9dC3wGo6j9",
+  "user": {
+    "id_str": "2004312674138832896",
+    "name": "🧚‍♀️",
+    "screen_name": "catalogging",
+    "is_blue_verified": true,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/2004315349253046272/IyR3dBMB_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2089029385621823840"
+    ],
+    "editable_until_msecs": "1786901992000",
+    "edits_remaining": "5",
+    "is_edit_eligible": false
+  },
+  "mediaDetails": [
+    {
+      "additional_media_info": {},
+      "display_url": "pic.x.com/9dC3wGo6j9",
+      "expanded_url": "https://x.com/catalogging/status/2089029385621823840/video/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        244,
+        267
+      ],
+      "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2089029250166800384/img/6P8ts6foZGV-h5OQ.jpg",
+      "original_info": {
+        "focus_rects": [],
+        "height": 1280,
+        "width": 720
+      },
+      "sizes": {
+        "large": {
+          "h": 1280,
+          "resize": "fit",
+          "w": 720
+        },
+        "medium": {
+          "h": 1200,
+          "resize": "fit",
+          "w": 675
+        },
+        "small": {
+          "h": 680,
+          "resize": "fit",
+          "w": 383
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "video",
+      "url": "https://t.co/9dC3wGo6j9",
+      "video_info": {
+        "aspect_ratio": [
+          9,
+          16
+        ],
+        "duration_millis": 61291,
+        "variants": [
+          {
+            "content_type": "application/x-mpegURL",
+            "url": "https://video.twimg.com/amplify_video/2089029250166800384/pl/aKr19HPFvPVTyDQP.m3u8?v=d74"
+          },
+          {
+            "bitrate": 632000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2089029250166800384/vid/avc1/320x568/13UgJxPZsxM9XtlA.mp4"
+          },
+          {
+            "bitrate": 950000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2089029250166800384/vid/avc1/480x852/8T0yEUflqGLAAEWR.mp4"
+          },
+          {
+            "bitrate": 2176000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2089029250166800384/vid/avc1/720x1280/8Wkhlv4C5atBqgpx.mp4"
+          }
+        ]
+      }
+    },
+    {
+      "display_url": "pic.x.com/9dC3wGo6j9",
+      "expanded_url": "https://x.com/catalogging/status/2089029385621823840/video/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        244,
+        267
+      ],
+      "media_url_https": "https://pbs.twimg.com/media/HP25CPNX0AAQ9Fx.jpg",
+      "original_info": {
+        "focus_rects": [
+          {
+            "h": 739,
+            "w": 1320,
+            "x": 0,
+            "y": 1013
+          },
+          {
+            "h": 1320,
+            "w": 1320,
+            "x": 0,
+            "y": 432
+          },
+          {
+            "h": 1505,
+            "w": 1320,
+            "x": 0,
+            "y": 247
+          },
+          {
+            "h": 1752,
+            "w": 876,
+            "x": 444,
+            "y": 0
+          },
+          {
+            "h": 1752,
+            "w": 1320,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "height": 1752,
+        "width": 1320
+      },
+      "sizes": {
+        "large": {
+          "h": 1752,
+          "resize": "fit",
+          "w": 1320
+        },
+        "medium": {
+          "h": 1200,
+          "resize": "fit",
+          "w": 904
+        },
+        "small": {
+          "h": 680,
+          "resize": "fit",
+          "w": 512
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "photo",
+      "url": "https://t.co/9dC3wGo6j9"
+    }
+  ],
+  "photos": [
+    {
+      "backgroundColor": {
+        "red": 204,
+        "green": 214,
+        "blue": 221
+      },
+      "cropCandidates": [
+        {
+          "h": 739,
+          "w": 1320,
+          "x": 0,
+          "y": 1013
+        },
+        {
+          "h": 1320,
+          "w": 1320,
+          "x": 0,
+          "y": 432
+        },
+        {
+          "h": 1505,
+          "w": 1320,
+          "x": 0,
+          "y": 247
+        },
+        {
+          "h": 1752,
+          "w": 876,
+          "x": 444,
+          "y": 0
+        },
+        {
+          "h": 1752,
+          "w": 1320,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "expandedUrl": "https://x.com/catalogging/status/2089029385621823840/video/1",
+      "url": "https://pbs.twimg.com/media/HP25CPNX0AAQ9Fx.jpg",
+      "width": 1320,
+      "height": 1752
+    }
+  ],
+  "video": {
+    "aspectRatio": [
+      9,
+      16
+    ],
+    "contentType": "media_entity",
+    "durationMs": 61291,
+    "mediaAvailability": {
+      "status": "available"
+    },
+    "poster": "https://pbs.twimg.com/amplify_video_thumb/2089029250166800384/img/6P8ts6foZGV-h5OQ.jpg",
+    "variants": [
+      {
+        "type": "application/x-mpegURL",
+        "src": "https://video.twimg.com/amplify_video/2089029250166800384/pl/aKr19HPFvPVTyDQP.m3u8?v=d74"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2089029250166800384/vid/avc1/320x568/13UgJxPZsxM9XtlA.mp4"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2089029250166800384/vid/avc1/480x852/8T0yEUflqGLAAEWR.mp4"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2089029250166800384/vid/avc1/720x1280/8Wkhlv4C5atBqgpx.mp4"
+      }
+    ],
+    "videoId": {
+      "type": "tweet",
+      "id": "2089029385621823840"
+    },
+    "viewCount": 0
+  },
+  "conversation_count": 31,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}

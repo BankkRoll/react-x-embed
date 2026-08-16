@@ -9,7 +9,7 @@
     "dev": "pnpm build:swc -w",
     "types": "tsc --emitDeclarationOnly",
     "lint": "TIMING=1 eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
-    "test": "tsx --test test/**/*.test.ts",
+    "test": "tsx --tsconfig ./test/tsconfig.json --import ./test/css-module-loader-register.mjs --test test/*.test.ts",
     "clean": "rm -rf dist && rm -rf .turbo"
   },
   "license": "MIT",

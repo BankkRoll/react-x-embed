@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // The package build emits JSX untouched for swc to handle, but the tests
+    // execute it directly, so it has to be compiled here.
+    "jsx": "react-jsx",
+    "noEmit": true
+  },
+  "include": ["../src/**/*.ts", "../src/**/*.tsx", "./**/*.ts"]
+}

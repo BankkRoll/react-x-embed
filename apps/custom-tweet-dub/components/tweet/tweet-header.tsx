@@ -1,4 +1,4 @@
-import { type EnrichedTweet } from 'react-tweet'
+import { type EnrichedTweet } from 'react-x-embed'
 import { truncate } from './utils'
 import { Twitter } from './icons'
 import BlurImage from './blur-image'

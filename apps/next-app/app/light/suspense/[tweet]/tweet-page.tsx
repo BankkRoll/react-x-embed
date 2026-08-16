@@ -1,5 +1,5 @@
-import { getTweet } from 'react-tweet/api'
-import { EmbeddedTweet, TweetNotFound } from 'react-tweet'
+import { getTweet } from 'react-x-embed/api'
+import { EmbeddedTweet, TweetNotFound } from 'react-x-embed'
 
 const TweetPage = async ({ id }: { id: string }) => {
   try {

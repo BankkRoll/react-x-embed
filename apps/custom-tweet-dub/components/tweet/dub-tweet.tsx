@@ -1,4 +1,4 @@
-import { type EnrichedTweet } from 'react-tweet'
+import { type EnrichedTweet } from 'react-x-embed'
 import { nFormatter } from './utils'
 import { Heart, Message } from './icons'
 import { Tilt } from './tilt'

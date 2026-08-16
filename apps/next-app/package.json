@@ -2,7 +2,7 @@
   "name": "next-app",
   "private": true,
   "license": "MIT",
-  "repository": "https://github.com/vercel/react-tweet.git",
+  "repository": "https://github.com/BankkRoll/react-x-embed.git",
   "author": "Luis Alvarez (https://twitter.com/luis_fades)",
   "scripts": {
     "dev": "next dev -p 3001",
@@ -18,7 +18,7 @@
     "next": "^16.2.7",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-tweet": "workspace:*"
+    "react-x-embed": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "24.5.2",

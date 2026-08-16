@@ -71,8 +71,8 @@ To prevent this, you can use a db like Redis or [Vercel KV](https://vercel.com/d
 
 ```tsx
 import { Suspense } from 'react'
-import { TweetSkeleton, EmbeddedTweet, TweetNotFound } from 'react-tweet'
-import { fetchTweet, Tweet } from 'react-tweet/api'
+import { TweetSkeleton, EmbeddedTweet, TweetNotFound } from 'react-x-embed'
+import { fetchTweet, Tweet } from 'react-x-embed/api'
 import { kv } from '@vercel/kv'
 
 async function getTweet(

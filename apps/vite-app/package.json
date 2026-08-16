@@ -2,7 +2,7 @@
   "name": "vite-app",
   "private": true,
   "license": "MIT",
-  "repository": "https://github.com/vercel/react-tweet.git",
+  "repository": "https://github.com/BankkRoll/react-x-embed.git",
   "author": "Luis Alvarez (https://twitter.com/luis_fades)",
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.14.2",
-    "react-tweet": "workspace:*",
+    "react-x-embed": "workspace:*",
     "swr": "^2.3.6"
   },
   "devDependencies": {

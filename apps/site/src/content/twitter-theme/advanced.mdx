@@ -7,7 +7,7 @@ The components used by the Twitter theme allow some simple [customization option
 For example, you can build your own tweet component but without the reply button like so:
 
 ```tsx filename="my-tweet.tsx" copy
-import type { Tweet } from 'react-tweet/api'
+import type { Tweet } from 'react-x-embed/api'
 import {
   type TwitterComponents,
   TweetContainer,
@@ -19,7 +19,7 @@ import {
   TweetActions,
   QuotedTweet,
   enrichTweet,
-} from 'react-tweet'
+} from 'react-x-embed'
 
 type Props = {
   tweet: Tweet
@@ -49,8 +49,8 @@ Then, you can build your own `Tweet` component that uses the `MyTweet` component
 
 ```tsx filename="tweet.tsx" copy
 import { Suspense } from 'react'
-import { getTweet } from 'react-tweet/api'
-import { type TweetProps, TweetNotFound, TweetSkeleton } from 'react-tweet'
+import { getTweet } from 'react-x-embed/api'
+import { type TweetProps, TweetNotFound, TweetSkeleton } from 'react-x-embed'
 import { MyTweet } from './my-tweet'
 
 const TweetContent = async ({ id, components, onError }: TweetProps) => {
@@ -96,7 +96,7 @@ import {
   TweetNotFound,
   TweetSkeleton,
   useTweet,
-} from 'react-tweet'
+} from 'react-x-embed'
 
 export const Tweet = ({
   id,

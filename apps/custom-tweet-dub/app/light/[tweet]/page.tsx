@@ -1,4 +1,4 @@
-import { getTweet } from 'react-tweet/api'
+import { getTweet } from 'react-x-embed/api'
 import { Tweet } from '@/components/tweet'
 
 type Props = {

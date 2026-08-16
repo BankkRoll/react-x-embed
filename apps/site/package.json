@@ -2,9 +2,9 @@
   "name": "site",
   "private": true,
   "license": "MIT",
-  "repository": "https://github.com/vercel/react-tweet.git",
+  "repository": "https://github.com/BankkRoll/react-x-embed.git",
   "author": "Luis Alvarez (https://twitter.com/luis_fades)",
-  "description": "Official site and documentation for react-tweet",
+  "description": "Documentation for react-x-embed",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,7 +17,7 @@
     "nextra-theme-docs": "^4.6.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-tweet": "workspace:*"
+    "react-x-embed": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.4",

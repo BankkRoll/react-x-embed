@@ -1,6 +1,6 @@
 import { unstable_cache } from 'next/cache'
-import { getTweet as _getTweet } from 'react-tweet/api'
-import { EmbeddedTweet, TweetNotFound } from 'react-tweet'
+import { getTweet as _getTweet } from 'react-x-embed/api'
+import { EmbeddedTweet, TweetNotFound } from 'react-x-embed'
 
 const getTweet = unstable_cache(
   async (id: string) => _getTweet(id),

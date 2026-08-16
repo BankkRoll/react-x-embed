@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     site: 'react-tweet.vercel.app',
   },
   appleWebApp: {
-    title: 'react-tweet',
+    title: 'react-x-embed',
   },
   other: {
     'msapplication-TileColor': '#fff',
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
 
 const navbar = (
   <Navbar
-    logo={<b>react-tweet</b>}
-    projectLink="https://github.com/vercel/react-tweet"
+    logo={<b>react-x-embed</b>}
+    projectLink="https://github.com/BankkRoll/react-x-embed"
   />
 )
 const footer = (
@@ -80,7 +80,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/vercel/react-tweet/tree/main/apps/site/src/content"
+          docsRepositoryBase="https://github.com/BankkRoll/react-x-embed/tree/main/apps/site/src/content"
           footer={footer}
         >
           {children}

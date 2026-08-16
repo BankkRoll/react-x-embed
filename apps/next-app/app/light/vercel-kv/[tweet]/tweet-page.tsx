@@ -1,5 +1,5 @@
-import { fetchTweet, Tweet } from 'react-tweet/api'
-import { EmbeddedTweet, TweetNotFound } from 'react-tweet'
+import { fetchTweet, Tweet } from 'react-x-embed/api'
+import { EmbeddedTweet, TweetNotFound } from 'react-x-embed'
 import { kv } from '@vercel/kv'
 
 async function getTweet(

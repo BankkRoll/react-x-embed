@@ -2,7 +2,7 @@
   "private": true,
   "license": "MIT",
   "author": "Luis Alvarez (https://twitter.com/luis_fades)",
-  "repository": "https://github.com/vercel/react-tweet.git",
+  "repository": "https://github.com/BankkRoll/react-x-embed.git",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

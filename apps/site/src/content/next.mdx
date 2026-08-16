@@ -11,7 +11,7 @@ Follow the [installation docs in the Introduction](/#installation).
 In any component, import `Tweet` from `react-tweet` and use it like so:
 
 ```tsx copy
-import { Tweet } from 'react-tweet'
+import { Tweet } from 'react-x-embed'
 
 export default function Page() {
   return <Tweet id="2040511285998313827" />
@@ -39,8 +39,8 @@ It's recommended to enable cache for the Twitter API if you intend to go to prod
 ```tsx
 import { Suspense } from 'react'
 import { unstable_cache } from 'next/cache'
-import { TweetSkeleton, EmbeddedTweet, TweetNotFound } from 'react-tweet'
-import { getTweet as _getTweet } from 'react-tweet/api'
+import { TweetSkeleton, EmbeddedTweet, TweetNotFound } from 'react-x-embed'
+import { getTweet as _getTweet } from 'react-x-embed/api'
 
 const getTweet = unstable_cache(
   async (id: string) => _getTweet(id),
@@ -82,8 +82,8 @@ For example, using `getStaticProps` in `pages/[tweet].tsx` to fetch the tweet an
 
 ```tsx copy
 import { useRouter } from 'next/router'
-import { getTweet, type Tweet } from 'react-tweet/api'
-import { EmbeddedTweet, TweetSkeleton } from 'react-tweet'
+import { getTweet, type Tweet } from 'react-x-embed/api'
+import { EmbeddedTweet, TweetSkeleton } from 'react-x-embed'
 
 export async function getStaticProps({
   params,
@@ -130,7 +130,7 @@ In `tweet-components.tsx` or elsewhere, import the `Image` component from `next/
 
 ```tsx copy
 import Image from 'next/image'
-import type { TwitterComponents } from 'react-tweet'
+import type { TwitterComponents } from 'react-x-embed'
 
 export const components: TwitterComponents = {
   AvatarImg: (props) => <Image {...props} />,
@@ -141,7 +141,7 @@ export const components: TwitterComponents = {
 Then pass the `components` prop to `Tweet`:
 
 ```tsx copy
-import { Tweet } from 'react-tweet'
+import { Tweet } from 'react-x-embed'
 import { components } from './tweet-components'
 
 export default function Page() {

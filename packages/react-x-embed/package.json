@@ -1,8 +1,8 @@
 {
-  "name": "react-tweet",
-  "version": "3.3.1",
-  "repository": "https://github.com/vercel/react-tweet.git",
-  "author": "Luis Alvarez (https://twitter.com/luis_fades)",
+  "name": "react-x-embed",
+  "version": "4.0.0",
+  "repository": "https://github.com/BankkRoll/react-x-embed.git",
+  "author": "BankkRoll (https://github.com/BankkRoll)",
   "scripts": {
     "build": "pnpm build:swc && pnpm types",
     "build:swc": "swc src -d dist --copy-files",
@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vercel/react-tweet/issues"
+    "url": "https://github.com/BankkRoll/react-x-embed/issues"
   },
   "sideEffects": [
     "./dist/twitter-theme/tweet-container.js"
@@ -81,5 +81,19 @@
     "eslint-config-next": "^14.0.4",
     "tsx": "^4.19.2",
     "typescript": "^5.3.3"
-  }
+  },
+  "description": "Embed X (Twitter) posts in React — link previews, responsive media, and payload validation. No API key required.",
+  "homepage": "https://github.com/BankkRoll/react-x-embed",
+  "keywords": [
+    "react",
+    "x",
+    "twitter",
+    "tweet",
+    "embed",
+    "post",
+    "rsc",
+    "server-components",
+    "oembed",
+    "syndication"
+  ]
 }

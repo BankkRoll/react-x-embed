@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react'
-import { type EnrichedTweet } from 'react-tweet'
+import { type EnrichedTweet } from 'react-x-embed'
 
 const Link = ({ href, children }: { href: string; children: ReactNode }) => (
   <a

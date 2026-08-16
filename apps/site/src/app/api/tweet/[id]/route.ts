@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getTweet } from 'react-tweet/api'
+import { getTweet } from 'react-x-embed/api'
 import cors from 'edge-cors'
 
 export const fetchCache = 'only-cache'

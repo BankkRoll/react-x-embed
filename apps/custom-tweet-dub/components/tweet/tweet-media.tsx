@@ -1,5 +1,5 @@
-import type { MediaDetails } from 'react-tweet/api'
-import { type EnrichedTweet, getMediaUrl, getMp4Video } from 'react-tweet'
+import type { MediaDetails } from 'react-x-embed/api'
+import { type EnrichedTweet, getMediaUrl, getMp4Video } from 'react-x-embed'
 import BlurImage from './blur-image'
 
 export const TweetMedia = ({

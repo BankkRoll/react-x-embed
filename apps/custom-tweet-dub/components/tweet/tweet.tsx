@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
-import { type TweetCoreProps, enrichTweet } from 'react-tweet'
-import { getTweet } from 'react-tweet/api'
+import { type TweetCoreProps, enrichTweet } from 'react-x-embed'
+import { getTweet } from 'react-x-embed/api'
 import { DubTweet } from './dub-tweet'
 
 type Props = TweetCoreProps & {

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Image from 'next/image'
-import type { TwitterComponents } from 'react-tweet'
+import type { TwitterComponents } from 'react-x-embed'
 
 export const components: TwitterComponents = {
   AvatarImg: (props) => <Image {...props} />,

@@ -3,7 +3,7 @@
 ### `Tweet`
 
 ```tsx copy
-import { Tweet } from 'react-tweet'
+import { Tweet } from 'react-x-embed'
 ```
 
 ```tsx copy
@@ -33,7 +33,7 @@ Here's a good example of how to setup your own API route:
 
 ```ts filename="api/tweet/[tweet].ts" copy
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getTweet } from 'react-tweet/api'
+import { getTweet } from 'react-x-embed/api'
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
   const tweetId = req.query.tweet
@@ -60,7 +60,7 @@ Something similar can be done with Next.js API Routes or Route Handlers.
 ### `EmbeddedTweet`
 
 ```tsx copy
-import { EmbeddedTweet } from 'react-tweet'
+import { EmbeddedTweet } from 'react-x-embed'
 ```
 
 Renders a tweet. It accepts the following props:
@@ -71,7 +71,7 @@ Renders a tweet. It accepts the following props:
 ### `TweetSkeleton`
 
 ```tsx copy
-import { TweetSkeleton } from 'react-tweet'
+import { TweetSkeleton } from 'react-x-embed'
 ```
 
 A tweet skeleton useful for loading states.
@@ -79,7 +79,7 @@ A tweet skeleton useful for loading states.
 ### `TweetNotFound`
 
 ```tsx copy
-import { TweetNotFound } from 'react-tweet'
+import { TweetNotFound } from 'react-x-embed'
 ```
 
 A tweet not found component. It accepts the following props:
@@ -103,7 +103,7 @@ For example, to replace the default `img` tag used for the avatar and media with
 ```tsx copy
 // tweet-components.tsx
 import Image from 'next/image'
-import type { TwitterComponents } from 'react-tweet'
+import type { TwitterComponents } from 'react-x-embed'
 
 export const components: TwitterComponents = {
   AvatarImg: (props) => <Image {...props} />,

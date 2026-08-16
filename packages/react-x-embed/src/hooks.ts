@@ -6,6 +6,10 @@ import { isValidTweet, type Tweet, TwitterApiError } from './api/index.js'
 
 // Avoids an error when used in the pages directory where useSWR might be in `default`.
 const useSWR = ((swr as any).default as typeof swr) || swr
+// Upstream's public endpoint, kept as the zero-config default so client-side
+// rendering works out of the box. It is a shared, rate-limited service that
+// this project does not operate — pass `apiUrl` and host your own route before
+// going to production.
 const host = 'https://react-tweet.vercel.app'
 
 async function fetcher([url, fetchOptions]: [

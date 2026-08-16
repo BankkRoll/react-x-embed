@@ -11,15 +11,30 @@ import { TweetMediaVideo } from './tweet-media-video.js'
 import { MediaImg } from './media-img.js'
 import s from './tweet-media.module.css'
 
+/**
+ * Tallest a single piece of media renders, as a percentage of the embed width.
+ *
+ * Matches X's own embed, which caps a lone item at a square box: a 9:16 video
+ * would otherwise resolve to 177.8% — nearly twice as tall as the embed is
+ * wide — and push the rest of the tweet out of view. Verified against the
+ * captured reference embeds in `test/fixtures/*.x-embed.geometry.json`.
+ */
+const MAX_SINGLE_MEDIA_PADDING = 100
+
 const getSkeletonStyle = (media: MediaDetails, itemCount: number) => {
   let paddingBottom = 56.25 // default of 16x9
 
-  // if we only have 1 item, show at original ratio
-  if (itemCount === 1)
-    paddingBottom =
-      (100 / media.original_info.width) * media.original_info.height
+  // if we only have 1 item, show at original ratio, capped so portrait media
+  // can't dominate the embed
+  if (itemCount === 1) {
+    const { width, height } = media.original_info ?? {}
+    const ratio = width > 0 ? (100 / width) * height : paddingBottom
 
-  // if we have 2 items, double the default to be 16x9 total
+    paddingBottom = Math.min(ratio, MAX_SINGLE_MEDIA_PADDING)
+  }
+
+  // if we have 2 items, double the default to be 16x9 total. Each cell spans
+  // half the width, so doubling its padding keeps the whole block at 16x9.
   if (itemCount === 2) paddingBottom = paddingBottom * 2
 
   return {

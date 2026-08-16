@@ -1,0 +1,158 @@
+input::placeholder { user-select: none; }
+iframe { color-scheme: auto; }
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/responsive-web/client-web/Chirp-Light.3a18e64a.woff2") format("woff2"), url("https://abs.twimg.com/responsive-web/client-web/Chirp-Light.7a5673aa.woff") format("woff"); font-weight: 300; }
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/responsive-web/client-web/Chirp-Regular.80fda27a.woff2") format("woff2"), url("https://abs.twimg.com/responsive-web/client-web/Chirp-Regular.60b215ba.woff") format("woff"); font-weight: 400; }
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/responsive-web/client-web/Chirp-Medium.f8e2739a.woff2") format("woff2"), url("https://abs.twimg.com/responsive-web/client-web/Chirp-Medium.20fc288a.woff") format("woff"); font-weight: 500; }
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/responsive-web/client-web/Chirp-Bold.ebb56aba.woff2") format("woff2"), url("https://abs.twimg.com/responsive-web/client-web/Chirp-Bold.a573679a.woff") format("woff"); font-weight: 700; }
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/responsive-web/client-web/Chirp-Heavy.f44ae4ea.woff2") format("woff2"), url("https://abs.twimg.com/responsive-web/client-web/Chirp-Heavy.d70ec7ca.woff") format("woff"); font-weight: 800; }
+@font-face { font-family: TwitterChirpExtendedHeavy; src: url("https://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff2") format("woff2"), url("https://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff") format("woff"); font-weight: 800; }
+[stylesheet-group="0"] { }
+html { text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+body { margin: 0px; }
+input::-webkit-search-cancel-button, input::-webkit-search-decoration, input::-webkit-search-results-button, input::-webkit-search-results-decoration { display: none; }
+[stylesheet-group="0.1"] { }
+:focus:not([data-focusvisible-polyfill]) { outline: none; }
+[stylesheet-group="0.5"] { }
+.css-4rbku5 { background-color: rgba(0, 0, 0, 0); color: inherit; font: inherit; list-style: none; margin: 0px; text-align: inherit; text-decoration: none; }
+.css-18t94o4 { cursor: pointer; }
+[stylesheet-group="1"] { }
+.css-1dbjc4n { -webkit-box-align: stretch; -webkit-box-direction: normal; -webkit-box-orient: vertical; align-items: stretch; border: 0px solid black; box-sizing: border-box; display: flex; flex-basis: auto; flex-direction: column; flex-shrink: 0; margin: 0px; min-height: 0px; min-width: 0px; padding: 0px; position: relative; z-index: 0; }
+.css-901oao { border: 0px solid black; box-sizing: border-box; color: rgb(0, 0, 0); display: inline; font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; padding: 0px; white-space: pre-wrap; overflow-wrap: break-word; }
+.css-16my406 { color: inherit; font: inherit; white-space: inherit; }
+.css-1hf3ou5 { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
+.css-9pa8cd { inset: 0px; height: 100%; opacity: 0; position: absolute; width: 100%; z-index: -1; }
+[stylesheet-group="2"] { }
+.r-13awgt0 { flex: 1 1 0%; }
+.r-1ets6dv { border-color: rgb(207, 217, 222); }
+.r-1q9bdsx { border-radius: 12px; }
+.r-rs99b7 { border-width: 1px; }
+.r-1udh08x { overflow: hidden; }
+.r-1adg3ll { display: block; }
+.r-bztko3 { overflow: visible; }
+.r-sdzlij { border-radius: 9999px; }
+.r-6koalj { display: flex; }
+.r-4qtqp9 { display: inline-block; }
+.r-xoduu5 { display: inline-flex; }
+.r-19fsva8 { margin: 0px; }
+.r-1phboty { border-style: solid; }
+.r-1867qdf { border-radius: 16px; }
+.r-17gur6a { border-radius: 0px; }
+.r-11mg6pl { border-color: rgb(255, 255, 255); }
+.r-14f9gny { border-width: 4px; }
+.r-1471scf { display: inline; }
+[stylesheet-group="2.1"] { }
+.r-4amgru { margin-left: 4px; margin-right: 4px; }
+.r-s1qlax { padding-left: 4px; padding-right: 4px; }
+.r-ymttw5 { padding-left: 16px; padding-right: 16px; }
+[stylesheet-group="2.2"] { }
+.r-12vffkv > * { pointer-events: auto; }
+.r-12vffkv { pointer-events: none !important; }
+.r-1loqt21 { cursor: pointer; }
+.r-vakc41 { max-width: 550px; }
+.r-y54riw { min-width: 250px; }
+.r-14lw9ot { background-color: rgb(255, 255, 255); }
+.r-iphfwy { padding-bottom: 4px; }
+.r-1qhn6m8 { padding-left: 16px; }
+.r-i023vh { padding-right: 16px; }
+.r-ttdzmv { padding-top: 12px; }
+.r-o7ynqc { transition-duration: 0.2s; }
+.r-6416eg { transition-property: background-color, box-shadow; }
+.r-1ny4l3l { outline-style: none; }
+.r-18u37iz { -webkit-box-direction: normal; -webkit-box-orient: horizontal; flex-direction: row; }
+.r-kzbkwu { padding-bottom: 12px; }
+.r-13qz1uu { width: 100%; }
+.r-1p0dtai { bottom: 0px; }
+.r-1pi2tsx { height: 100%; }
+.r-1d2f490 { left: 0px; }
+.r-u8s1d { position: absolute; }
+.r-ipm5af { top: 0px; }
+.r-1wyvozj { left: 50%; }
+.r-1v2oles { top: 50%; }
+.r-desppf { transform: translateX(-50%) translateY(-50%); }
+.r-ggadg3 { left: -2px; }
+.r-8jfcpp { top: -2px; }
+.r-633pao { pointer-events: none !important; }
+.r-12181gd { box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 2px inset; }
+.r-eqz5dr { -webkit-box-direction: normal; -webkit-box-orient: vertical; flex-direction: column; }
+.r-1777fci { -webkit-box-pack: center; justify-content: center; }
+.r-1kh6xel { max-width: calc(100% - 84px); }
+.r-1wbh5a2 { flex-shrink: 1; }
+.r-dnmrzs { max-width: 100%; }
+.r-1awozwy { -webkit-box-align: center; align-items: center; }
+.r-bcqeeo { min-width: 0px; }
+.r-qvutc0 { overflow-wrap: break-word; }
+.r-rjixqe { line-height: 20px; }
+.r-1qd0xha { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.r-a023e6 { font-size: 15px; }
+.r-b88u0q { font-weight: 700; }
+.r-3s2u2q { white-space: nowrap; }
+.r-poiln3 { font-family: inherit; }
+.r-dflpy8 { height: 1.2em; }
+.r-sjv1od { margin-left: 0.075em; }
+.r-zw8f10 { margin-right: 0.075em; }
+.r-10akycc { vertical-align: -20%; }
+.r-h9hxbl { width: 1.2em; }
+.r-1pos5eu { vertical-align: middle; }
+.r-16dba41 { font-weight: 400; }
+.r-1q142lx { flex-shrink: 0; }
+.r-yyyyoo { fill: currentcolor; }
+.r-1xvli5t { height: 1.25em; }
+.r-bnwqim { position: relative; }
+.r-1plcrui { vertical-align: text-bottom; }
+.r-lrvibr { user-select: none; }
+.r-1cvl2hr { color: rgb(29, 155, 240); }
+.r-f9ja8p { max-height: 20px; }
+.r-og9te1 { max-width: 20px; }
+.r-9cviqr { margin-left: 2px; }
+.r-1wvb978 { font-feature-settings: "ss01"; }
+.r-1jj8364 { margin-left: auto; }
+.r-18jsvk2 { color: rgb(15, 20, 25); }
+.r-6zzn7w { height: 25px; }
+.r-q1j0wu { width: 25px; }
+.r-adyw6z { font-size: 20px; }
+.r-135wba7 { line-height: 24px; }
+.r-1dqbpge { cursor: text; }
+.r-1s2bzr4 { margin-top: 12px; }
+.r-1iusvr4 { flex-basis: 0px; }
+.r-16y2uox { -webkit-box-flex: 1; flex-grow: 1; }
+.r-a5pmau { margin-right: 2px; }
+.r-1g3bmmq { border: 0px solid; }
+.r-zchlnj { right: 0px; }
+.r-1mlwlqe { flex-basis: auto; }
+.r-417010 { z-index: 0; }
+.r-1niwhzg { background-color: rgba(0, 0, 0, 0); }
+.r-vvn4in { background-position: center center; }
+.r-u6sd8q { background-repeat: no-repeat; }
+.r-4gszlv { background-size: cover; }
+.r-1wyyakw { z-index: -1; }
+.r-e6wyp1 { height: 67px; }
+.r-1p15a4t { width: 67px; }
+.r-l5o3uw { background-color: rgb(29, 155, 240); }
+.r-jwli3a { color: rgb(255, 255, 255); }
+.r-1sa8knb { height: calc(50% + 4px); }
+.r-gcko2u { width: calc(50% + 4px); }
+.r-1dsia8u { padding-left: 3px; }
+.r-1bymd8e { margin-top: 2px; }
+.r-1d09ksm { -webkit-box-align: baseline; align-items: baseline; }
+.r-1w6e6rj { flex-wrap: wrap; }
+.r-9aw3ui { gap: 4px; }
+.r-mabqd8 { height: 32px; }
+.r-2eo2mk { margin-right: -4px; }
+.r-1yvhtrz { width: 32px; }
+.r-14j79pv { color: rgb(83, 100, 113); }
+.r-1habvwh { -webkit-box-align: start; align-items: flex-start; }
+.r-5kkj8d { border-top-width: 1px; }
+.r-14gqq1x { margin-top: 4px; }
+.r-1h8ys4a { padding-top: 4px; }
+.r-1mf7evn { margin-right: 20px; }
+.r-cnkkqs { margin-left: -4px; }
+.r-vkub15 { color: rgb(249, 24, 128); }
+.r-1sreavd { fill: rgb(249, 24, 128); }
+.r-1b43r93 { font-size: 14px; }
+.r-1cwl3u0 { line-height: 16px; }
+.r-13hce6t { margin-left: 4px; }
+.r-4r3dic { fill: rgb(29, 155, 240); }
+.r-15ysp7h { min-height: 32px; }
+.r-4wgw6l { min-width: 32px; }
+.r-q4m81j { text-align: center; }
+html, body, * { overscroll-behavior: auto !important; }

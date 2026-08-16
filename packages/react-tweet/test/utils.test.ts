@@ -8,7 +8,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 
-import type { MediaAnimatedGif, MediaVideo } from '../src/api/index.js'
+import type { MediaDetails, MediaVideo } from '../src/api/index.js'
 import {
   enrichTweet,
   getHlsVideo,
@@ -117,6 +117,50 @@ describe('getMediaUrl', () => {
       assert.equal(url.searchParams.get('name'), size)
       assert.ok(url.searchParams.get('format'))
     }
+  })
+})
+
+describe('media aspect ratios', () => {
+  // Mirrors getSkeletonStyle in twitter-theme/tweet-media.tsx.
+  const paddingFor = (media: MediaDetails, itemCount: number) => {
+    let paddingBottom = 56.25
+    if (itemCount === 1) {
+      const { width, height } = media.original_info ?? ({} as any)
+      const ratio = width > 0 ? (100 / width) * height : paddingBottom
+      paddingBottom = Math.min(ratio, 100)
+    }
+    if (itemCount === 2) paddingBottom = paddingBottom * 2
+    return paddingBottom
+  }
+
+  it('caps a lone portrait video instead of letting it dominate the embed', () => {
+    // catalog's video is 720x1280 — 177.8% at natural ratio. X renders its own
+    // embed at 113%, so anything approaching 177% is far too tall.
+    const video = byName('catalog').mediaDetails!.find((m) => m.type === 'video')!
+    const { width, height } = video.original_info
+    assert.ok((100 / width) * height > 170, 'fixture should be strongly portrait')
+    assert.equal(paddingFor(video, 1), 100)
+  })
+
+  it('leaves landscape media at its natural ratio', () => {
+    // fortnite is 1920x1080; X renders it at 56.3%.
+    const photo = byName('fortnite').mediaDetails![0]
+    assert.equal(paddingFor(photo, 1).toFixed(1), '56.3')
+  })
+
+  it('keeps multi-item grids at 16x9 overall', () => {
+    // Each cell of a 2-up grid is half the width, so doubling the cell padding
+    // resolves the block back to 16x9 — matching X's 56.1% measured cells.
+    const [first] = byName('catalog').mediaDetails!
+    assert.equal(paddingFor(first, 2), 112.5)
+
+    const grid = byName('coyote').mediaDetails!
+    assert.equal(paddingFor(grid[0], grid.length), 56.25)
+  })
+
+  it('falls back to 16x9 when original_info is missing', () => {
+    const bare = { type: 'photo' } as unknown as MediaDetails
+    assert.equal(paddingFor(bare, 1), 56.25)
   })
 })
 

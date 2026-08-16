@@ -1,0 +1,100 @@
+{
+  "url": "https://platform.twitter.com/embed/Tweet.html?id=2089056463289254188&theme=light",
+  "article": {
+    "w": 515,
+    "h": 606,
+    "ratioPct": 117.7,
+    "objectFit": "fill",
+    "borderRadius": "0px",
+    "paddingBottom": "4px",
+    "maxHeight": "none",
+    "aspectRatio": "auto",
+    "overflow": "visible",
+    "display": "flex",
+    "gridTemplateColumns": "none"
+  },
+  "media": [
+    {
+      "tag": "IMG",
+      "src": "https://pbs.twimg.com/profile_images/1436461513741586436/fhKMYKQ__normal.jpg",
+      "w": 48,
+      "h": 48,
+      "ratioPct": 100,
+      "objectFit": "fill",
+      "borderRadius": "0px",
+      "paddingBottom": "0px",
+      "maxHeight": "none",
+      "aspectRatio": "auto",
+      "overflow": "clip",
+      "display": "block",
+      "gridTemplateColumns": "none",
+      "parent": {
+        "w": 48,
+        "h": 48,
+        "ratioPct": 100,
+        "objectFit": "fill",
+        "borderRadius": "0px",
+        "paddingBottom": "0px",
+        "maxHeight": "none",
+        "aspectRatio": "auto",
+        "overflow": "hidden",
+        "display": "flex",
+        "gridTemplateColumns": "none"
+      },
+      "grandparent": {
+        "w": 48,
+        "h": 48,
+        "ratioPct": 100,
+        "objectFit": "fill",
+        "borderRadius": "0px",
+        "paddingBottom": "0px",
+        "maxHeight": "none",
+        "aspectRatio": "auto",
+        "overflow": "visible",
+        "display": "block",
+        "gridTemplateColumns": "none"
+      }
+    },
+    {
+      "tag": "IMG",
+      "src": "https://pbs.twimg.com/media/HP3Rx6UWoAA2p4O?format=jpg&name=small",
+      "w": 481,
+      "h": 260,
+      "ratioPct": 54.1,
+      "objectFit": "fill",
+      "borderRadius": "0px",
+      "paddingBottom": "0px",
+      "maxHeight": "none",
+      "aspectRatio": "auto",
+      "overflow": "clip",
+      "display": "block",
+      "gridTemplateColumns": "none",
+      "parent": {
+        "w": 481,
+        "h": 260,
+        "ratioPct": 54.1,
+        "objectFit": "fill",
+        "borderRadius": "0px",
+        "paddingBottom": "0px",
+        "maxHeight": "none",
+        "aspectRatio": "auto",
+        "overflow": "hidden",
+        "display": "flex",
+        "gridTemplateColumns": "none"
+      },
+      "grandparent": {
+        "w": 481,
+        "h": 260,
+        "ratioPct": 54.1,
+        "objectFit": "fill",
+        "borderRadius": "0px",
+        "paddingBottom": "0px",
+        "maxHeight": "none",
+        "aspectRatio": "auto",
+        "overflow": "visible",
+        "display": "block",
+        "gridTemplateColumns": "none"
+      }
+    }
+  ]
+}

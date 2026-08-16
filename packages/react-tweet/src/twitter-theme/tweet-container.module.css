@@ -1,7 +1,6 @@
 .root {
   width: 100%;
   min-width: 250px;
-  max-width: 550px;
   overflow: hidden;
   /* Base font styles */
   color: var(--tweet-font-color);
@@ -10,10 +9,22 @@
   box-sizing: border-box;
   border: var(--tweet-border);
   border-radius: 12px;
-  margin: var(--tweet-container-margin);
   background-color: var(--tweet-bg-color);
   transition-property: background-color, box-shadow;
   transition-duration: 0.2s;
+}
+
+/*
+ * Layout properties a consumer is most likely to want to change, held at zero
+ * specificity by :where(). At equal specificity the winner is decided by source
+ * order, and a utility class from Tailwind or similar usually loads before
+ * node_modules CSS — so the module won and the override silently did nothing.
+ * Zero specificity means any consumer selector takes precedence regardless of
+ * order. The custom properties still work for anyone theming that way.
+ */
+:where(.root) {
+  margin: var(--tweet-container-margin);
+  max-width: var(--tweet-container-max-width, 550px);
 }
 .root:hover {
   background-color: var(--tweet-bg-color-hover);

@@ -46,6 +46,9 @@
   color: inherit;
   display: flex;
   align-items: center;
+  /* WCAG 2.2 Target Size (Minimum) is 24x24. These lines are 20px tall, so
+     they are padded out without changing the visual layout. */
+  min-height: 24px;
 }
 .authorLink:hover {
   text-decoration-line: underline;
@@ -62,19 +65,27 @@
 
 .authorMeta {
   display: flex;
+  align-items: center;
 }
 .authorFollow {
   display: flex;
+  align-items: center;
 }
 .username {
   color: var(--tweet-font-color-secondary);
   text-decoration: none;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
 }
 .follow {
   color: var(--tweet-color-blue-secondary);
   text-decoration: none;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
 }
 .follow:hover {
   text-decoration-line: underline;

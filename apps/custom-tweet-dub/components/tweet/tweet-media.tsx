@@ -1,5 +1,10 @@
 import type { MediaDetails } from 'react-x-embed/api'
-import { type EnrichedTweet, getMediaUrl, getMp4Video } from 'react-x-embed'
+import {
+  type EnrichedTweet,
+  getHlsVideo,
+  getMediaUrl,
+  getMp4Video,
+} from 'react-x-embed'
 import BlurImage from './blur-image'
 
 export const TweetMedia = ({
@@ -10,6 +15,9 @@ export const TweetMedia = ({
   media: MediaDetails
 }) => {
   if (media.type == 'video') {
+    const mp4 = getMp4Video(media)
+    const hls = getHlsVideo(media)
+
     return (
       <video
         className="rounded-lg border border-gray-200 drop-shadow-sm"
@@ -20,19 +28,28 @@ export const TweetMedia = ({
         muted
         playsInline
       >
-        <source src={getMp4Video(media).url} type="video/mp4" />
+        {/* HLS first so Safari, which plays it more reliably than X's mp4
+            renditions, picks it up before falling through to the mp4. */}
+        {hls && hls.url !== mp4?.url && (
+          <source src={hls.url} type={hls.content_type} />
+        )}
+        {mp4 && <source src={mp4.url} type={mp4.content_type} />}
         Your browser does not support the video tag.
       </video>
     )
   }
 
   if (media.type == 'animated_gif') {
+    const gif = getMp4Video(media)
+    // A GIF with no playable rendition has nothing to show.
+    if (!gif) return null
+
     return (
       <BlurImage
         alt={tweet.text}
         width={2048}
         height={media.original_info.height * (2048 / media.original_info.width)}
-        src={getMp4Video(media).url}
+        src={gif.url}
         className="rounded-lg border border-gray-200 drop-shadow-sm"
       />
     )

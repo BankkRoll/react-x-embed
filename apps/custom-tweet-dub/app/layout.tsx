@@ -1,11 +1,14 @@
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import '../base.css'
 
-const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
-  <html>
-    <head></head>
-    <body>{children}</body>
-  </html>
-)
-
-export default RootLayout
+// NOTE: typed as a plain function rather than FC. Next 16 generates a
+// LayoutProps constraint whose return type allows a Promise, which FC's
+// ReactElement return is not assignable to.
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html>
+      <head></head>
+      <body>{children}</body>
+    </html>
+  )
+}

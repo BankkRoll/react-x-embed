@@ -2,6 +2,8 @@
 
 Embed X (Twitter) posts in React. No API key, no iframe, no client-side JavaScript required.
 
+> [View the docs for react-x-embed ->](https://bankkroll.github.io/react-x-embed/)
+
 A fork of [vercel/react-tweet](https://github.com/vercel/react-tweet) that fixes the outstanding crashes, matches X's own embed layout, and renders the data the syndication API returns but upstream ignored.
 
 ```bash
@@ -16,17 +18,17 @@ export default function Page() {
 }
 ```
 
-See the [package readme](./packages/react-x-embed/readme.md) for what changed and why, or the [docs](./apps/site/src/content/index.mdx) to get started.
+See the [package readme](./packages/react-x-embed/readme.md) for what changed and why, or the [docs](https://bankkroll.github.io/react-x-embed/) to get started.
 
 ## Repository layout
 
-| Path | Description |
-| --- | --- |
-| [`packages/react-x-embed`](./packages/react-x-embed) | The library |
-| [`apps/site`](./apps/site) | Documentation site |
-| [`apps/next-app`](./apps/next-app) | Next.js test app — App Router, Pages Router, SWR, caching |
-| [`apps/vite-app`](./apps/vite-app) | Vite test app |
-| [`apps/custom-tweet-dub`](./apps/custom-tweet-dub) | Custom theme example |
+| Path                                                 | Description                                               |
+| ---------------------------------------------------- | --------------------------------------------------------- |
+| [`packages/react-x-embed`](./packages/react-x-embed) | The library                                               |
+| [`apps/site`](./apps/site)                           | Documentation site                                        |
+| [`apps/next-app`](./apps/next-app)                   | Next.js test app — App Router, Pages Router, SWR, caching |
+| [`apps/vite-app`](./apps/vite-app)                   | Vite test app                                             |
+| [`apps/custom-tweet-dub`](./apps/custom-tweet-dub)   | Custom theme example                                      |
 
 ## Development
 

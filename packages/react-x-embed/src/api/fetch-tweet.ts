@@ -91,9 +91,14 @@ export async function fetchTweet(
     return { notFound: true }
   }
 
+  // `data` is undefined whenever the error response isn't JSON, which is the
+  // common case rather than the exception: rate limiting answers with
+  // `text/plain` and upstream failures with HTML. Reading `data.error`
+  // unguarded threw a TypeError that replaced the real status, so a 429 was
+  // indistinguishable from a bug and callers had nothing to back off on.
   throw new TwitterApiError({
     message:
-      typeof data.error === 'string'
+      typeof data?.error === 'string'
         ? data.error
         : `Failed to fetch tweet at "${url}" with "${res.status}".`,
     status: res.status,

@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react'
 import { Tweet } from 'react-x-embed'
 import styles from './tweet-playground.module.css'
 
-const DEFAULT_ID = '1628832338187636740'
+const DEFAULT_ID = '1683920951807971329'
 
 /** Pulls the numeric id out of a post URL, or passes a bare id through. */
 const parseId = (input: string): string | null => {
@@ -13,7 +13,9 @@ const parseId = (input: string): string | null => {
   if (/^\d{1,40}$/.test(trimmed)) return trimmed
 
   // https://x.com/<user>/status/<id>, with or without query or trailing slash.
-  const match = trimmed.match(/(?:twitter|x)\.com\/[^/]+\/status(?:es)?\/(\d+)/i)
+  const match = trimmed.match(
+    /(?:twitter|x)\.com\/[^/]+\/status(?:es)?\/(\d+)/i
+  )
   return match ? match[1] : null
 }
 
@@ -52,7 +54,7 @@ export const TweetPlayground = () => {
             className={styles.input}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="https://x.com/vercel/status/1628832338187636740"
+            placeholder="https://x.com/vercel/status/1683920951807971329"
             spellCheck={false}
             autoComplete="off"
           />

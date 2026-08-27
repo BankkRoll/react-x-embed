@@ -121,9 +121,6 @@ importers:
 
   apps/site:
     dependencies:
-      edge-cors:
-        specifier: ^0.2.1
-        version: 0.2.1
       next:
         specifier: ^16.2.7
         version: 16.2.7(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -2769,9 +2766,6 @@ packages:
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
-
-  edge-cors@0.2.1:
-    resolution: {integrity: sha512-ti3F5g96Dx99/+CCPuNpmN0gO5eIxMOTwyMMgNTpxs2rXsmpg6A76yVQZkaKVroWJfJeH6slRqL1HNE52yr5TA==}
 
   edge-runtime@2.5.9:
     resolution: {integrity: sha512-pk+k0oK0PVXdlT4oRp4lwh+unuKB7Ng4iZ2HB+EZ7QCEQizX360Rp/F4aRpgpRgdP2ufB35N+1KppHmYjqIGSg==}
@@ -8019,8 +8013,6 @@ snapshots:
       gopd: 1.2.0
 
   eastasianwidth@0.2.0: {}
-
-  edge-cors@0.2.1: {}
 
   edge-runtime@2.5.9:
     dependencies:

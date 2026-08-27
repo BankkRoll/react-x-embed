@@ -1,0 +1,86 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/site/**'
+      - 'packages/react-x-embed/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it: Pages rejects an
+# upload whose run was cancelled mid-flight, which shows up as a failed deploy
+# of an otherwise good commit.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  FORCE_COLOR: 3
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        # Version comes from `packageManager` in the root package.json.
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Build docs
+        # The site imports `react-x-embed` from the workspace, so the package
+        # has to be built first; `--filter=site...` includes its dependencies.
+        run: pnpm build --filter=site...
+        env:
+          # A project site is served from `/<repo>/`; `configure-pages` resolves
+          # the empty string for a user site or custom domain.
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
+      - name: Add .nojekyll
+        # Without this, Pages runs the output through Jekyll, which drops
+        # underscore-prefixed paths and takes `_next/` — every asset — with it.
+        run: touch apps/site/out/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: apps/site/out
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

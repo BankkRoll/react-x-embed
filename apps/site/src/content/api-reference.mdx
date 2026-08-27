@@ -62,6 +62,29 @@ const tweet = await fetchFromSomewhereElse(id)
 if (!isValidTweet(tweet)) return <TweetNotFound />
 ```
 
+### `getOEmbed`
+
+```tsx
+import { getOEmbed } from 'react-x-embed/api'
+
+function getOEmbed(url: string): Promise<any>
+```
+
+Fetches X's [oEmbed](https://oembed.com/) response for a post URL, which is a
+blob of blockquote HTML plus a `<script>` tag pointing at `platform.twitter.com`.
+Returns `undefined` on a 404 and throws on any other non-OK status.
+
+This is **not** how this library renders posts, and it is not what you want in
+most cases. Rendering its `html` reintroduces exactly what `react-x-embed`
+exists to avoid: a third-party script, X's own styles, and a layout you can't
+theme or server-render. Use [`getTweet`](#gettweet) instead.
+
+It remains exported for the narrow case of needing X's canonical oEmbed
+metadata — an author attribution string, or the URL X considers canonical — and
+is inherited from upstream unchanged. The response is typed `any` because the
+endpoint is undocumented; it takes no `fetchOptions`, so it can't participate in
+your framework's cache the way `getTweet` does.
+
 ### `useTweet`
 
 > If your app supports React Server Components, use [`getTweet`](#gettweet) instead.
@@ -107,6 +130,18 @@ Or if the tweet component already knows about the endpoint it needs to use, you 
 ```tsx copy
 <Tweet id={id} />
 ```
+
+### `useMounted`
+
+```tsx
+import { useMounted } from 'react-x-embed'
+
+const useMounted: () => boolean
+```
+
+Returns `false` on the server and on the first client render, then `true` once
+mounted. Used internally to defer rendering that would otherwise mismatch
+between server and client. Exported for custom themes that need the same guard.
 
 ## Deriving
 

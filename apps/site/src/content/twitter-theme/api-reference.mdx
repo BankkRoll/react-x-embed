@@ -128,6 +128,8 @@ type TwitterComponents = {
 
 `MediaImg` receives `srcSet` and `sizes` alongside `src`, so a replacement should forward them — dropping them costs you the responsive renditions. `AvatarImg` receives an already-normalised `src`; see [`normalizeAvatarUrl`](/api-reference#normalizeavatarurl).
 
+> The same type is also exported as `TweetComponents`, which is deprecated and kept only so code written against upstream keeps compiling. Use `TwitterComponents`.
+
 For example, to replace the default `img` tag used for the avatar and media with `next/image` you can do the following:
 
 ```tsx copy

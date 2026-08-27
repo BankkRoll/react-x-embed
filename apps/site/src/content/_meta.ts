@@ -22,7 +22,7 @@ const meta: MetaRecord = {
   contributing: '',
   'next.js-link': {
     title: 'Next.js Docs',
-    href: 'https://nextjs.org?utm_source=react-tweet.site&utm_medium=referral&utm_campaign=sidebar',
+    href: 'https://nextjs.org?utm_source=react-x-embed&utm_medium=referral&utm_campaign=sidebar',
   },
 }
 

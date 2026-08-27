@@ -1,4 +1,33 @@
-# react-tweet
+# react-x-embed
+
+## 1.0.0
+
+First release under the `react-x-embed` name, a fork of
+[`react-tweet`](https://github.com/vercel/react-tweet) at 3.3.1. Version
+numbering restarts at 1.0.0; the history below is the upstream package's and is
+kept for provenance.
+
+### Major Changes
+
+- Renamed the package to `react-x-embed`.
+
+### Minor Changes
+
+- Render link previews from the `card` field.
+- Responsive images with colour placeholders; withheld media is dropped.
+- Validate syndication payloads before rendering, so malformed responses fail
+  closed instead of crashing the renderer.
+
+### Patch Changes
+
+- Handle HLS-only video variants, add a Safari HLS source, and fix the `play()`
+  `AbortError`.
+- Cap tall single media at a square box.
+- Sharpen avatars, settle the `useTweet` loading state, and name client exports.
+- Meet the WCAG target-size minimum and make the layout overridable.
+- Report the real HTTP status when an error response isn't JSON. Rate limiting
+  answers with `text/plain`, so reading `data.error` unguarded threw a
+  `TypeError` that masked the 429 and left callers nothing to back off on.
 
 ## 3.3.1
 

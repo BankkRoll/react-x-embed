@@ -1,7 +1,10 @@
 {
   "name": "react-x-embed",
-  "version": "1.0.0",
-  "repository": "https://github.com/BankkRoll/react-x-embed.git",
+  "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BankkRoll/react-x-embed.git"
+  },
   "author": "BankkRoll (https://github.com/BankkRoll)",
   "scripts": {
     "build": "pnpm build:swc && pnpm types",
@@ -20,12 +23,22 @@
     "./dist/twitter-theme/tweet-container.js"
   ],
   "type": "module",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "react-server": "./dist/index.js",
-      "default": "./dist/index.client.js"
+      "react-server": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "default": {
+        "types": "./dist/index.client.d.ts",
+        "default": "./dist/index.client.js"
+      }
     },
-    "./api": "./dist/api/index.js",
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "default": "./dist/api/index.js"
+    },
     "./theme.css": "./dist/twitter-theme/theme.css"
   },
   "files": [
@@ -34,33 +47,19 @@
   "typesVersions": {
     "*": {
       "index": [
-        "src/index"
+        "dist/index.d.ts"
       ],
       "utils": [
-        "src/utils"
+        "dist/utils.d.ts"
       ],
       "api": [
-        "src/api/index"
+        "dist/api/index.d.ts"
       ],
       "*": []
     }
   },
   "publishConfig": {
-    "access": "public",
-    "typesVersions": {
-      "*": {
-        "index": [
-          "dist/index.d.ts"
-        ],
-        "utils": [
-          "dist/utils.d.ts"
-        ],
-        "api": [
-          "dist/api/index.d.ts"
-        ],
-        "*": []
-      }
-    }
+    "access": "public"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

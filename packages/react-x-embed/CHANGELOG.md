@@ -1,5 +1,19 @@
 # react-x-embed
 
+## 1.0.1
+
+### Patch Changes
+
+- Fixed type resolution for consumers on the legacy `node` module resolution.
+  `typesVersions` pointed at `src/`, which isn't published — only `dist/` is —
+  so TypeScript reported "Cannot find module 'react-x-embed' or its
+  corresponding type declarations" despite the declarations shipping. The
+  `publishConfig.typesVersions` override meant to correct this on publish was
+  silently ignored: npm doesn't support that key, and warns as much.
+
+  `exports` now carries explicit `types` conditions and `typesVersions` points
+  at `dist`. Verified against `bundler`, `nodenext` and `node10`.
+
 ## 1.0.0
 
 First release under the `react-x-embed` name, a fork of

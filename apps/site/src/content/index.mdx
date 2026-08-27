@@ -6,6 +6,15 @@ This library is fully compatible with React Server Components. [Learn more](http
 
 It is a fork of [vercel/react-tweet](https://github.com/vercel/react-tweet). See [what's different](#whats-different-from-react-tweet) below.
 
+## Try it
+
+Paste any post URL or ID to render it. This page is a static export with no
+server behind it — the post is fetched in your browser with
+[`useTweet`](/api-reference#usetweet), which is what `Tweet` falls back to
+wherever React Server Components aren't available.
+
+<TweetPlayground />
+
 ## Installation
 
 Install `react-x-embed` using your package manager of choice:

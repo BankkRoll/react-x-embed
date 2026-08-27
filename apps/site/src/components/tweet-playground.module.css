@@ -1,0 +1,84 @@
+.root {
+  margin-top: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgb(107 114 128);
+}
+
+:global(.dark) .label {
+  color: rgb(156 163 175);
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.input {
+  flex: 1 1 20rem;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid rgb(229 231 235);
+  border-radius: 0.5rem;
+}
+
+.input:focus-visible {
+  outline: 2px solid rgb(59 130 246);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+:global(.dark) .input {
+  border-color: rgb(55 65 81);
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: white;
+  background: rgb(17 24 39);
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  /* WCAG 2.2 target size, matching the package's own floor. */
+  min-height: 24px;
+}
+
+.button:hover {
+  opacity: 0.85;
+}
+
+:global(.dark) .button {
+  color: rgb(17 24 39);
+  background: white;
+}
+
+.error {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: rgb(220 38 38);
+}
+
+:global(.dark) .error {
+  color: rgb(248 113 113);
+}
+
+.preview {
+  margin-top: 1rem;
+}
